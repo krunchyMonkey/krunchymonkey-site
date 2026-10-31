@@ -63,3 +63,11 @@ Matching screenshots, passing tests, passing GitHub Actions, a real public previ
 - The 32 planned KrunchOS issues were created as `KMOS-001` through `KMOS-032` (GitHub issues #14–#45), with scoped acceptance criteria and dependencies. Consult the [roadmap](ROADMAP.md), rather than inventing more tickets for the same scope.
 - Repository milestones and Project #9 assignments are not yet verified. The idempotent `scripts/setup-krunchos-planning.ps1` helper assigns existing issues to seven milestones and the project board when run by an authorized GitHub CLI user. Preview with `-WhatIf`; it does not close or modify original issues.
 - Original issues #1–#12 remain open pending actual release acceptance; #1, #7 and #8 contain earlier evidence comments; #2–#6 and #9–#12 contain audit notes. Don't close any without checking its specific outstanding validation/approval.
+
+## Optional retro presentation bridge
+
+- Follow [KMOS-033](https://github.com/krunchyMonkey/krunchymonkey-site/issues/46) for the versioned first-party presentation contract, dependent on KMOS-020 and KMOS-021. Do not assume every demo supports it.
+- Keep the KrunchOS browser itself retro; a separately hosted public fictional-data demo can opt into compact navigation and optional retro theming. The same demo remains fully usable standalone.
+- Do not use URL parameters as a security boundary. Validate `postMessage` source/origin, typed payloads and handshake versions, with bounded timeout and safe external-link fallback.
+- No user records, tokens, privileged commands, dynamic cross-origin CSS injection or private LAN application embedding.
+- Create a separate, reviewed demo-side issue/PR when a suitable public demo repository actually exists; do not conflate public demo code with the private research app.
