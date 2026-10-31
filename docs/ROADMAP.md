@@ -44,10 +44,13 @@
 | KrunchOS v0.2 — Desktop (#18–#22) | Wallpaper, window lifecycle and dragging, dock, folder shortcuts, state persistence | Open, move, focus, minimize, close and reopen apps; keyboard tested |
 | KrunchOS v0.3 — Mobile (#23–#26) | App launcher, full-screen views, mobile dock/back navigation, touch behavior | Phone experience verified without tiny draggable windows or trapped focus |
 | KrunchOS v0.4 — Workbench (#27–#31) | Project catalog, README.me, build journal, architecture case studies and deep links | Real public content organized through the shared app model and direct links |
-| KrunchOS v0.5 — Demo Browser (#32–#35) | Embedded-demo browser shell, origin allowlist, blocked-frame fallback, mobile view | Fictional public demos work or safely open externally; private app stays private |
+| KrunchOS v0.5 — Demo Browser (#32–#35, [#46](https://github.com/krunchyMonkey/krunchymonkey-site/issues/46)) | Retro browser frame, safe public-demo embeds, optional first-party presentation bridge, mobile fallback | Hosted fictional demos may adapt their presentation when integrated; unadapted sites always remain usable externally; private app stays private |
 | KrunchOS v1.0 — Public Launch (#36–#40) | Skippable boot, mascot motion, terminal, a11y/performance/security QA, release runbook | Accessible, secure, maintainable production rollout with rollback evidence |
 
 **Dependencies:** v0.1 gates architecture and content contracts; desktop, mobile, and workbench may proceed in parallel thereafter. Browser integrates shell + catalog; v1.0 follows integration verification. Keep Releases A-C and their existing issue IDs untouched. The **27 scoped KrunchOS implementation issues** ([#14–#40](https://github.com/krunchyMonkey/krunchymonkey-site/issues?q=is%3Aissue+is%3Aopen+KMOS-)) were created on 2026-10-31, with per-issue criteria and dependencies. The **actual repository milestones and Project #9 field assignments remain to be set**; the proposed roadmap alone does not create them. Earlier issues #1–#12 remain open pending evidence and signoff.
+
+
+**Opt-in presentation bridge (v0.5):** [KMOS-033 / #46](https://github.com/krunchyMonkey/krunchymonkey-site/issues/46) introduces a versioned, origin-validated bridge for *first-party fictional public demos only*. KrunchOS keeps a retro window shell; compatible demos may offer compact navigation and retro presentation without changing application logic. The feature is optional and must never delay safe generic demo browsing. Sites we do not control use neutral previews/external links, never assumed integration. No integration with private `tg.krunchymonkey.dev`.
 
 ## Proposed v1.1 — Open Workshop (community contributions)
 
@@ -64,14 +67,14 @@ See [OPEN_WORKSHOP.md](OPEN_WORKSHOP.md) for the proposed community experience. 
 
 ## Repository milestone / Project #9 assignment
 
-The 32 new GitHub issues were created and groomed with focused acceptance criteria, verification expectations and dependency references. Because the connected GitHub integration does not expose GitHub Projects V2 mutation or milestone-creation tools, **they are not yet confirmed as Project #9 items or assigned to repository milestones**. After this documentation PR is reviewed/merged, run the idempotent local helper with authenticated GitHub CLI:
+The original 32 groomed GitHub issues plus the optional first-party presentation bridge issue #46 were created and groomed with focused acceptance criteria, verification expectations and dependency references. Because the connected GitHub integration does not expose GitHub Projects V2 mutation or milestone-creation tools, **they are not yet confirmed as Project #9 items or assigned to repository milestones**. After this documentation PR is reviewed/merged, run the idempotent local helper with authenticated GitHub CLI:
 
 ```powershell
 pwsh -File .\\scripts\\setup-krunchos-planning.ps1 -WhatIf
 pwsh -File .\\scripts\\setup-krunchos-planning.ps1
 ```
 
-Requires `gh auth login` and `gh auth refresh -s project`. The helper creates/reuses seven repository milestones, assigns issues #14–#45, adds them to Project #9, and populates a `KrunchOS Phase` project field. It does not merge, push, publish, or modify DNS. The original 12 issues are **not** reclassified or closed by the helper.
+Requires `gh auth login` and `gh auth refresh -s project`. The helper creates/reuses seven repository milestones, assigns issues #14–#46, adds them to Project #9, and populates a `KrunchOS Phase` project field. It does not merge, push, publish, or modify DNS. The original 12 issues are **not** reclassified or closed by the helper.
 
 ## Operating rules
 
