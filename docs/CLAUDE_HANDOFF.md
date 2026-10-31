@@ -40,3 +40,11 @@ Matching screenshots, passing tests, passing GitHub Actions, a real public previ
 - The current project is still no-build static HTML/CSS. A React/TypeScript/Vite migration is a **proposal** subject to a focused architecture ADR and reviewed PR; do not change tooling or the deployed page as an incidental cleanup.
 - Preserve current approved logo/brand identity, existing informational/privacy routes, static GitHub Pages deployment, and the strict boundary from private `tg.krunchymonkey.dev` and real research data.
 - Stage the work as small independently tested PRs; include desktop/mobile visual evidence, integration/accessibility checks, and rollback awareness. No auto-merging or assumptions that the existing 12 issues are complete.
+
+
+## Proposed Open Workshop community direction
+
+- Read [`docs/OPEN_WORKSHOP.md`](OPEN_WORKSHOP.md) for the planned contribution journey. KrunchOS is a curated creative space for software craftsmanship, not an unmoderated code-sharing platform.
+- The site began with AI assistance. Human-written and AI-assisted contributions are held to the same standards of understanding, architectural intent, correctness, and maintainability.
+- Establish licensing, brand-asset exclusions, and safe PR review during Foundations. Introduce read-only first-party craft notes during Workbench. External contributions and a curated gallery belong to a **proposed v1.1 milestone**, not v1.0.
+- Never expose private research data. Do not enable automatic third-party publishing, merges, or privileged CI execution of unreviewed changes. Preserve opt-in attribution and a maintainer review path.
