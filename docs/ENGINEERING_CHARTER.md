@@ -10,6 +10,14 @@ KrunchyMonkey is both a personal workshop and a public engineering portfolio. Th
 
 The goal is not to maximize abstraction or lines of code. It is to make every decision understandable, reversible, testable, and maintainable.
 
+## Order beneath the chaos: the open workshop
+
+The visual experience may be quirky and unconventional. The implementation should demonstrate deliberate architecture, clean boundaries, and care for maintainability.
+
+KrunchOS began with AI-assisted development. That origin is part of the story, not something to conceal. AI changes the tools, but engineers still own design judgments, tradeoffs, verification, and what they ship. Review contributions for understandable intent and useful craftsmanship, not whether individual lines were produced by hand.
+
+We also want to offer a curated creative outlet for developers. A contributor can improve the workstation itself or submit a short engineering craft note for the public workbench. Nothing is automatically published or merged. See [OPEN_WORKSHOP.md](OPEN_WORKSHOP.md) for the proposed reviewer workflow, contributor experience, and licensing prerequisites.
+
 ## Principles (non-negotiable for new KrunchOS implementation)
 
 1. **Feature-first organization.** Group related UI, state, tests, and domain concepts by capability instead of accumulating a global `components/` or `utils/` junk drawer.
