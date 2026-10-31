@@ -1,0 +1,32 @@
+name: Validate KrunchOS preview
+
+on:
+  pull_request:
+    paths:
+      - "krunchos/**"
+      - ".github/workflows/krunchos-validate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  preview-checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: krunchos
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install preview dependencies
+        run: npm install --no-audit --no-fund
+      - name: Check TypeScript
+        run: npm run typecheck
+      - name: Lint preview source
+        run: npm run lint
+      - name: Run colocated tests
+        run: npm test
+      - name: Build local preview artifact
+        run: npm run build
