@@ -32,6 +32,23 @@
 
 **Gate:** Privacy policy accurately reflects delivered product; not submitted as draft to Google. OAuth remains implemented and tested in the **private Tracing Guatemala repo**, not the public static site.
 
+## Proposed KrunchOS milestones — next evolution (not yet created in GitHub)
+
+**Design direction:** KrunchOS turns the public personal portfolio into a simulated workstation: draggable desktop windows and folders on large screens, app launcher and full-screen app views on mobile, plus an allowlisted public-demo browser. It must remain a useful, accessible site, not just a novelty.
+
+**Code-craft contract:** [ENGINEERING_CHARTER.md](ENGINEERING_CHARTER.md) (proposed). New implementation must follow feature-first organization, a directory per reusable component with explicit `index.ts` exports, colocated tests, clean import boundaries, typed app contracts, and measurable quality gates. The component architecture/migration requires an ADR before framework changes.
+
+| Proposed milestone | Scope | Gate |
+|---|---|---|
+| KrunchOS v0.1 — Foundations | Desktop/mobile UX, ADR for frontend migration and routing, typed app registry, design tokens and quality scaffolding | Reviewed UX + architecture; static preview and baseline checks pass |
+| KrunchOS v0.2 — Desktop | Wallpaper, window lifecycle and dragging, dock, folder shortcuts, state persistence | Open, move, focus, minimize, close and reopen apps; keyboard tested |
+| KrunchOS v0.3 — Mobile | App launcher, full-screen views, mobile dock/back navigation, touch behavior | Phone experience verified without tiny draggable windows or trapped focus |
+| KrunchOS v0.4 — Workbench | Project catalog, README.me, build journal, architecture case studies and deep links | Real public content organized through the shared app model and direct links |
+| KrunchOS v0.5 — Demo Browser | Embedded-demo browser shell, origin allowlist, blocked-frame fallback, mobile view | Fictional public demos work or safely open externally; private app stays private |
+| KrunchOS v1.0 — Public Launch | Skippable boot, mascot motion, terminal, a11y/performance/security QA, release runbook | Accessible, secure, maintainable production rollout with rollback evidence |
+
+**Dependencies:** v0.1 gates architecture and content contracts; desktop, mobile, and workbench may proceed in parallel thereafter. Browser integrates shell + catalog; v1.0 follows integration verification. Keep Releases A-C and their existing issue IDs untouched. These milestones/issues are a design proposal, **not** a claim they exist on GitHub or that earlier issues are finished.
+
 ## Operating rules
 
 - Every issue is independently testable and produces a small PR where code changes are needed.
