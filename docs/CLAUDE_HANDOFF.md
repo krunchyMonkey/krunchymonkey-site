@@ -64,10 +64,11 @@ Matching screenshots, passing tests, passing GitHub Actions, a real public previ
 - Repository milestones and Project #9 assignments are not yet verified. The idempotent `scripts/setup-krunchos-planning.ps1` helper assigns existing issues to seven milestones and the project board when run by an authorized GitHub CLI user. Preview with `-WhatIf`; it does not close or modify original issues.
 - Original issues #1–#12 remain open pending actual release acceptance; #1, #7 and #8 contain earlier evidence comments; #2–#6 and #9–#12 contain audit notes. Don't close any without checking its specific outstanding validation/approval.
 
-## Optional retro presentation bridge
+## Curated Browser and first-party KrunchOS presentation
 
-- Follow [KMOS-033](https://github.com/krunchyMonkey/krunchymonkey-site/issues/46) for the versioned first-party presentation contract, dependent on KMOS-020 and KMOS-021. Do not assume every demo supports it.
-- Keep the KrunchOS browser itself retro; a separately hosted public fictional-data demo can opt into compact navigation and optional retro theming. The same demo remains fully usable standalone.
-- Do not use URL parameters as a security boundary. Validate `postMessage` source/origin, typed payloads and handshake versions, with bounded timeout and safe external-link fallback.
-- No user records, tokens, privileged commands, dynamic cross-origin CSS injection or private LAN application embedding.
-- Create a separate, reviewed demo-side issue/PR when a suitable public demo repository actually exists; do not conflate public demo code with the private research app.
+- [KMOS-033](https://github.com/krunchyMonkey/krunchymonkey-site/issues/46) is a curated browser for **fully working first-party public demos**, not a screenshot gallery or unrestricted browser.
+- Approved public demo sites we control are expected to implement a pixel-era KrunchOS mode natively. The same application remains available in its normal standalone appearance with shared behavior and data model.
+- Initial integration uses an allowlisted HTTPS entry point and a non-security URL presentation hint. Only add exact-origin/source-validated `postMessage` when two-way communication is required.
+- Run an actual fictional-data multistep workflow in the demo as an acceptance test. Keep any mock external integrations honestly labeled; do not leak private research data or integrate directly with private `tg.krunchymonkey.dev`.
+- Restrict host navigation to trusted configured sites. Cross-origin iframe navigation cannot be treated as fully controlled by the parent; the demo must cooperate with external-link policy. If an embed fails, offer a clear external fallback.
+- Keep apps independently deployed and testable. Prefer simple, typed presentation contracts over a runtime CSS injector or privileged proxy.
