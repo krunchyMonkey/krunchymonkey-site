@@ -57,3 +57,9 @@ Matching screenshots, passing tests, passing GitHub Actions, a real public previ
 - Keep rare short comments when they explain a non-obvious **why** (browser workaround, security invariant, external constraint, tradeoff). Prefer improving the design first.
 - Keep architectural decisions and public contributor/onboarding guidance outside implementation in focused ADRs, README files, or docs. Do not confuse sparse source comments with no documentation.
 - Retain required copyright/license notices and technical tool directives. Do not optimize for a comment-count metric.
+
+## Groomed KrunchOS backlog and board assignment
+
+- The 32 planned KrunchOS issues were created as `KMOS-001` through `KMOS-032` (GitHub issues #14–#45), with scoped acceptance criteria and dependencies. Consult the [roadmap](ROADMAP.md), rather than inventing more tickets for the same scope.
+- Repository milestones and Project #9 assignments are not yet verified. The idempotent `scripts/setup-krunchos-planning.ps1` helper assigns existing issues to seven milestones and the project board when run by an authorized GitHub CLI user. Preview with `-WhatIf`; it does not close or modify original issues.
+- Original issues #1–#12 remain open pending actual release acceptance; #1, #7 and #8 contain earlier evidence comments; #2–#6 and #9–#12 contain audit notes. Don't close any without checking its specific outstanding validation/approval.
