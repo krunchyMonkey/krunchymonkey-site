@@ -1,0 +1,110 @@
+[
+  {
+    "id": "KM-001",
+    "title": "[KM-001] Lock approved KrunchyMonkey branding and screenshot references",
+    "release": "A - Design Parity",
+    "priority": "P0",
+    "workflow": "Ready",
+    "category": "design",
+    "bodyFile": "docs/issues/KM-001.md"
+  },
+  {
+    "id": "KM-002",
+    "title": "[KM-002] Verify homepage is visually 1:1 at desktop width",
+    "release": "A - Design Parity",
+    "priority": "P0",
+    "workflow": "Ready",
+    "category": "design",
+    "bodyFile": "docs/issues/KM-002.md"
+  },
+  {
+    "id": "KM-003",
+    "title": "[KM-003] Verify mobile visual parity and accessible navigation",
+    "release": "A - Design Parity",
+    "priority": "P0",
+    "workflow": "Ready",
+    "category": "design",
+    "bodyFile": "docs/issues/KM-003.md"
+  },
+  {
+    "id": "KM-004",
+    "title": "[KM-004] Ship public Tracing Guatemala project overview with fictional-only demo",
+    "release": "A - Design Parity",
+    "priority": "P0",
+    "workflow": "Ready",
+    "category": "content",
+    "bodyFile": "docs/issues/KM-004.md"
+  },
+  {
+    "id": "KM-005",
+    "title": "[KM-005] Review and publish accurate Tracing Guatemala privacy notice",
+    "release": "C - OAuth Readiness",
+    "priority": "P0",
+    "workflow": "Backlog",
+    "category": "security",
+    "bodyFile": "docs/issues/KM-005.md"
+  },
+  {
+    "id": "KM-006",
+    "title": "[KM-006] Add static validation and visual-regression evidence workflow",
+    "release": "A - Design Parity",
+    "priority": "P1",
+    "workflow": "Ready",
+    "category": "test",
+    "bodyFile": "docs/issues/KM-006.md"
+  },
+  {
+    "id": "KM-007",
+    "title": "[KM-007] Enable GitHub Pages Actions preview deployment",
+    "release": "B - Public Launch",
+    "priority": "P0",
+    "workflow": "Ready",
+    "category": "deployment",
+    "bodyFile": "docs/issues/KM-007.md"
+  },
+  {
+    "id": "KM-008",
+    "title": "[KM-008] Connect krunchymonkey.dev apex to GitHub Pages without exposing tg",
+    "release": "B - Public Launch",
+    "priority": "P0",
+    "workflow": "Backlog",
+    "category": "deployment",
+    "bodyFile": "docs/issues/KM-008.md"
+  },
+  {
+    "id": "KM-009",
+    "title": "[KM-009] Check accessibility, SEO metadata and page performance",
+    "release": "B - Public Launch",
+    "priority": "P1",
+    "workflow": "Backlog",
+    "category": "quality",
+    "bodyFile": "docs/issues/KM-009.md"
+  },
+  {
+    "id": "KM-010",
+    "title": "[KM-010] Coordinate Google OAuth homepage, brand and privacy URLs",
+    "release": "C - OAuth Readiness",
+    "priority": "P1",
+    "workflow": "Backlog",
+    "category": "integration",
+    "bodyFile": "docs/issues/KM-010.md"
+  },
+  {
+    "id": "KM-011",
+    "title": "[KM-011] Confirm public operator contact and actual privacy practices",
+    "release": "C - OAuth Readiness",
+    "priority": "P0",
+    "workflow": "Backlog",
+    "category": "content",
+    "bodyFile": "docs/issues/KM-011.md"
+  },
+  {
+    "id": "KM-012",
+    "title": "[KM-012] Run public launch smoke test and document rollback",
+    "release": "B - Public Launch",
+    "priority": "P0",
+    "workflow": "Backlog",
+    "category": "quality",
+    "bodyFile": "docs/issues/KM-012.md"
+  }
+]

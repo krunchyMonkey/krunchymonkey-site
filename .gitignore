@@ -1,0 +1,21 @@
+# Never track secrets, user research records, or development environments.
+.env
+.env.*
+*.pem
+*.key
+*token*.txt
+**/secrets/
+**/private-data/
+node_modules/
+dist/
+_site/
+.cache/
+.vscode/
+.idea/
+.DS_Store
+__pycache__/
+*.pyc
+playwright-report/
+test-results/
+*.log
+visual-output/
