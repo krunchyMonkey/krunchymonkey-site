@@ -1,0 +1,25 @@
+name: Validate site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  static-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify internal links, images, and privacy boundaries
+        run: python3 scripts/check_site.py
+      - name: Check public-only build
+        run: python3 scripts/build_site.py
+      - name: Confirm built file manifest
+        run: |
+          find dist -type f -print | sort
+          test -f dist/index.html
+          test -f dist/tracing-guatemala/privacy/index.html
+          test -f dist/assets/krunchymonkey-logo.webp
