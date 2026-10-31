@@ -48,3 +48,12 @@ Matching screenshots, passing tests, passing GitHub Actions, a real public previ
 - The site began with AI assistance. Human-written and AI-assisted contributions are held to the same standards of understanding, architectural intent, correctness, and maintainability.
 - Establish licensing, brand-asset exclusions, and safe PR review during Foundations. Introduce read-only first-party craft notes during Workbench. External contributions and a curated gallery belong to a **proposed v1.1 milestone**, not v1.0.
 - Never expose private research data. Do not enable automatic third-party publishing, merges, or privileged CI execution of unreviewed changes. Preserve opt-in attribution and a maintainer review path.
+
+
+## Self-documenting code rule for KrunchOS
+
+- Favor understandable names, typed contracts, small functions, clear component boundaries, and colocated behavior tests. The code should explain what it does without narration.
+- Do not generate redundant inline comments, decorative section headers, routine JSDoc, or boilerplate prose around implementation.
+- Keep rare short comments when they explain a non-obvious **why** (browser workaround, security invariant, external constraint, tradeoff). Prefer improving the design first.
+- Keep architectural decisions and public contributor/onboarding guidance outside implementation in focused ADRs, README files, or docs. Do not confuse sparse source comments with no documentation.
+- Retain required copyright/license notices and technical tool directives. Do not optimize for a comment-count metric.
