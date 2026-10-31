@@ -18,6 +18,16 @@ KrunchOS began with AI-assisted development. That origin is part of the story, n
 
 We also want to offer a curated creative outlet for developers. A contributor can improve the workstation itself or submit a short engineering craft note for the public workbench. Nothing is automatically published or merged. See [OPEN_WORKSHOP.md](OPEN_WORKSHOP.md) for the proposed reviewer workflow, contributor experience, and licensing prerequisites.
 
+## Retro shell, modern capabilities
+
+The workstation borrows the clarity, structure, and tactile appeal of early graphical computers: restrained color, crisp geometry, recognizable windows, simple menus, and a useful terminal. These are intentional **presentation choices**, not an excuse to recreate old usability limitations. Modern mouse, touch, keyboard, browser history, focus management, responsive layouts, and accessibility remain first-class.
+
+**A host should not dictate a guest's identity.** The Demo Browser provides a recognizable KrunchOS frame. Approved **first-party public demos we control** may *opt in* to a small, versioned presentation contract to hide duplicate site chrome, use compact navigation, or adapt a theme when embedded. Their standalone experience and core application behavior stay independent. Third-party and non-participating sites show a neutral preview/external-link option instead; they never need a retro skin.
+
+Cross-origin cooperation is an explicit, least-privilege interface: typed messages; exact allowlisted origins and sources; schema/version checking; handshake timeout and safe fallback. Presentation hints are not authentication, and the host must never assume it can read or rewrite an iframe's DOM. Do not transport credentials, account state, private research data, or privileged actions. A separately hosted fictional-data demo is the only eligible Tracing Guatemala integration; the private LAN application is not.
+
+This direction is tracked in [KMOS-033](https://github.com/krunchyMonkey/krunchymonkey-site/issues/46) (planned for v0.5), building on the safe embed work in [KMOS-020](https://github.com/krunchyMonkey/krunchymonkey-site/issues/33).
+
 ## Principles (non-negotiable for new KrunchOS implementation)
 
 1. **Feature-first organization.** Group related UI, state, tests, and domain concepts by capability instead of accumulating a global `components/` or `utils/` junk drawer.
