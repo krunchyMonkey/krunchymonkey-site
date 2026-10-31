@@ -49,6 +49,17 @@
 
 **Dependencies:** v0.1 gates architecture and content contracts; desktop, mobile, and workbench may proceed in parallel thereafter. Browser integrates shell + catalog; v1.0 follows integration verification. Keep Releases A-C and their existing issue IDs untouched. These milestones/issues are a design proposal, **not** a claim they exist on GitHub or that earlier issues are finished.
 
+## Proposed v1.1 — Open Workshop (community contributions)
+
+See [OPEN_WORKSHOP.md](OPEN_WORKSHOP.md) for the proposed community experience. The site should welcome engineers who enjoy the artistry of software. AI-assisted work is welcome when the author understands, owns, and can explain the result.
+
+- **During v0.1:** agree on contribution philosophy, code/document licensing, excluded original brand assets, and safe external PR review.
+- **During v0.4:** add a read-only Open Bench entry with curated first-party notes and engineering stories.
+- **v1.1:** opt-in contributor attribution, contribution guide and templates, validated static craft-note submissions, maintainer review, and curated publication.
+- **Later:** accept focused code contributions and community craft challenges within the engineering charter.
+
+**Gate:** The public contribution path requires licensing clarity, branch protection, explicit maintainer approval, restricted CI, and non-executable validated site content. v1.1 is not a blocker for KrunchOS v1.0.
+
 ## Operating rules
 
 - Every issue is independently testable and produces a small PR where code changes are needed.
