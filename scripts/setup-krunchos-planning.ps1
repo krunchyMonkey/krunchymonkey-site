@@ -41,7 +41,7 @@ $phases = @(
     @{ title='KrunchOS v0.2 - Desktop'; field='v0.2 Desktop'; issues=(18..22); description='Desktop shell, window manager, folders, dock and preferences' },
     @{ title='KrunchOS v0.3 - Mobile'; field='v0.3 Mobile'; issues=(23..26); description='Touch-first OS launcher, navigation and accessibility' },
     @{ title='KrunchOS v0.4 - Workbench'; field='v0.4 Workbench'; issues=(27..31); description='Projects, folders, journal, schematics and architecture stories' },
-    @{ title='KrunchOS v0.5 - Demo Browser'; field='v0.5 Demos'; issues=(32..35); description='Approved public demos, safe browser windows and mobile fallback' },
+    @{ title='KrunchOS v0.5 - Demo Browser'; field='v0.5 Demos'; issues=@(32,33,34,35,46); description='Public demo windows, origin checks, optional first-party presentation bridge and mobile fallback' },
     @{ title='KrunchOS v1.0 - Public Launch'; field='v1.0 Launch'; issues=(36..40); description='Boot experience, polish, quality review and public release' },
     @{ title='KrunchOS v1.1 - Open Workshop'; field='v1.1 Community'; issues=(41..45); description='Licensing, contribution process, content validation, curated gallery' }
 )
