@@ -32,3 +32,11 @@
 ## What constitutes completion
 
 Matching screenshots, passing tests, passing GitHub Actions, a real public preview URL and reviewed privacy/documentation contents. DNS cutover and Google OAuth verification are separate gates; do not auto-approve them.
+## Proposed next evolution: KrunchOS (not yet implemented)
+
+- Read [`docs/ENGINEERING_CHARTER.md`](ENGINEERING_CHARTER.md) and the proposed KrunchOS milestone table in [`docs/ROADMAP.md`](ROADMAP.md) before implementing redesign work.
+- The intended product is a personal-workshop OS UI: draggable windows, dock, folders, project explorer, journal, schematics, and allowlisted public demo browser; on mobile it becomes a touch-first app launcher with full-screen apps.
+- Code quality is part of the public portfolio: feature-first structure, one folder per reusable component, component-level `index.ts` exports, explicitly curated feature exports, colocated tests, strict TypeScript, modular state and narrow browser adapters, reviewed ADRs, and automated quality gates.
+- The current project is still no-build static HTML/CSS. A React/TypeScript/Vite migration is a **proposal** subject to a focused architecture ADR and reviewed PR; do not change tooling or the deployed page as an incidental cleanup.
+- Preserve current approved logo/brand identity, existing informational/privacy routes, static GitHub Pages deployment, and the strict boundary from private `tg.krunchymonkey.dev` and real research data.
+- Stage the work as small independently tested PRs; include desktop/mobile visual evidence, integration/accessibility checks, and rollback awareness. No auto-merging or assumptions that the existing 12 issues are complete.
