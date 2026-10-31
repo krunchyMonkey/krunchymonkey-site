@@ -73,7 +73,7 @@ Keep attribution opt-in and editable before publication. No public rankings, fol
 | Open Workshop v1.1 | Contribution templates, validated static content pipeline, maintainer review, opt-in attribution | External content PR can be reviewed and safely published; rejected PR cannot deploy |
 | Later | Community implementation improvements, curated craft challenges, long-running changelog | Existing architecture/quality gates remain enforced; contributor workflow stays low-friction |
 
-Do not create GitHub milestones or issues from this proposal without a separate planning step. Preserve all existing releases A–C and the existing KrunchOS milestones.
+The Open Workshop implementation backlog now consists of GitHub issues #41–#45. These issues are planned, not implemented; the corresponding repository milestone and Project #9 field assignments are still pending. Preserve existing releases A–C and all owner/privacy approval gates.
 
 ## Measure the right things
 
