@@ -32,7 +32,7 @@
 
 **Gate:** Privacy policy accurately reflects delivered product; not submitted as draft to Google. OAuth remains implemented and tested in the **private Tracing Guatemala repo**, not the public static site.
 
-## Proposed KrunchOS milestones — next evolution (not yet created in GitHub)
+## KrunchOS issue backlog — proposed milestones (repo issues created; milestones not yet assigned)
 
 **Design direction:** KrunchOS turns the public personal portfolio into a simulated workstation: draggable desktop windows and folders on large screens, app launcher and full-screen app views on mobile, plus an allowlisted public-demo browser. It must remain a useful, accessible site, not just a novelty.
 
@@ -40,14 +40,14 @@
 
 | Proposed milestone | Scope | Gate |
 |---|---|---|
-| KrunchOS v0.1 — Foundations | Desktop/mobile UX, ADR for frontend migration and routing, typed app registry, design tokens and quality scaffolding | Reviewed UX + architecture; static preview and baseline checks pass |
-| KrunchOS v0.2 — Desktop | Wallpaper, window lifecycle and dragging, dock, folder shortcuts, state persistence | Open, move, focus, minimize, close and reopen apps; keyboard tested |
-| KrunchOS v0.3 — Mobile | App launcher, full-screen views, mobile dock/back navigation, touch behavior | Phone experience verified without tiny draggable windows or trapped focus |
-| KrunchOS v0.4 — Workbench | Project catalog, README.me, build journal, architecture case studies and deep links | Real public content organized through the shared app model and direct links |
-| KrunchOS v0.5 — Demo Browser | Embedded-demo browser shell, origin allowlist, blocked-frame fallback, mobile view | Fictional public demos work or safely open externally; private app stays private |
-| KrunchOS v1.0 — Public Launch | Skippable boot, mascot motion, terminal, a11y/performance/security QA, release runbook | Accessible, secure, maintainable production rollout with rollback evidence |
+| KrunchOS v0.1 — Foundations ([#14–#17](https://github.com/krunchyMonkey/krunchymonkey-site/issues?q=is%3Aissue+KMOS-)) | Desktop/mobile UX, ADR for frontend migration and routing, typed app registry, design tokens and quality scaffolding | Reviewed UX + architecture; static preview and baseline checks pass |
+| KrunchOS v0.2 — Desktop (#18–#22) | Wallpaper, window lifecycle and dragging, dock, folder shortcuts, state persistence | Open, move, focus, minimize, close and reopen apps; keyboard tested |
+| KrunchOS v0.3 — Mobile (#23–#26) | App launcher, full-screen views, mobile dock/back navigation, touch behavior | Phone experience verified without tiny draggable windows or trapped focus |
+| KrunchOS v0.4 — Workbench (#27–#31) | Project catalog, README.me, build journal, architecture case studies and deep links | Real public content organized through the shared app model and direct links |
+| KrunchOS v0.5 — Demo Browser (#32–#35) | Embedded-demo browser shell, origin allowlist, blocked-frame fallback, mobile view | Fictional public demos work or safely open externally; private app stays private |
+| KrunchOS v1.0 — Public Launch (#36–#40) | Skippable boot, mascot motion, terminal, a11y/performance/security QA, release runbook | Accessible, secure, maintainable production rollout with rollback evidence |
 
-**Dependencies:** v0.1 gates architecture and content contracts; desktop, mobile, and workbench may proceed in parallel thereafter. Browser integrates shell + catalog; v1.0 follows integration verification. Keep Releases A-C and their existing issue IDs untouched. These milestones/issues are a design proposal, **not** a claim they exist on GitHub or that earlier issues are finished.
+**Dependencies:** v0.1 gates architecture and content contracts; desktop, mobile, and workbench may proceed in parallel thereafter. Browser integrates shell + catalog; v1.0 follows integration verification. Keep Releases A-C and their existing issue IDs untouched. The **27 scoped KrunchOS implementation issues** ([#14–#40](https://github.com/krunchyMonkey/krunchymonkey-site/issues?q=is%3Aissue+is%3Aopen+KMOS-)) were created on 2026-10-31, with per-issue criteria and dependencies. The **actual repository milestones and Project #9 field assignments remain to be set**; the proposed roadmap alone does not create them. Earlier issues #1–#12 remain open pending evidence and signoff.
 
 ## Proposed v1.1 — Open Workshop (community contributions)
 
@@ -59,6 +59,19 @@ See [OPEN_WORKSHOP.md](OPEN_WORKSHOP.md) for the proposed community experience. 
 - **Later:** accept focused code contributions and community craft challenges within the engineering charter.
 
 **Gate:** The public contribution path requires licensing clarity, branch protection, explicit maintainer approval, restricted CI, and non-executable validated site content. v1.1 is not a blocker for KrunchOS v1.0.
+
+**Community issues created:** [#41–#45](https://github.com/krunchyMonkey/krunchymonkey-site/issues?q=is%3Aissue+KMOS-), covering licensing, contribution safety, validated Craft Notes, Open Bench gallery and pilot. Actual milestone/board assignment is pending.
+
+## Repository milestone / Project #9 assignment
+
+The 32 new GitHub issues were created and groomed with focused acceptance criteria, verification expectations and dependency references. Because the connected GitHub integration does not expose GitHub Projects V2 mutation or milestone-creation tools, **they are not yet confirmed as Project #9 items or assigned to repository milestones**. After this documentation PR is reviewed/merged, run the idempotent local helper with authenticated GitHub CLI:
+
+```powershell
+pwsh -File .\\scripts\\setup-krunchos-planning.ps1 -WhatIf
+pwsh -File .\\scripts\\setup-krunchos-planning.ps1
+```
+
+Requires `gh auth login` and `gh auth refresh -s project`. The helper creates/reuses seven repository milestones, assigns issues #14–#45, adds them to Project #9, and populates a `KrunchOS Phase` project field. It does not merge, push, publish, or modify DNS. The original 12 issues are **not** reclassified or closed by the helper.
 
 ## Operating rules
 
