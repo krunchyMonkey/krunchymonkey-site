@@ -37,7 +37,7 @@ function Get-GhJson([string[]]$Arguments) {
 }
 
 $phases = @(
-    @{ title='KrunchOS v0.1 - Foundations'; field='v0.1 Foundations'; issues=(14..17); description='Design, framework ADR, typed app registry, CI and component conventions' },
+    @{ title='KrunchOS v0.1 - Foundations'; field='v0.1 Foundations'; issues=@(14,15,16,17,48,49); description='Design, framework ADR, typed app registry, CI and pixel-first 8bitcn UI experiment' },
     @{ title='KrunchOS v0.2 - Desktop'; field='v0.2 Desktop'; issues=(18..22); description='Desktop shell, window manager, folders, dock and preferences' },
     @{ title='KrunchOS v0.3 - Mobile'; field='v0.3 Mobile'; issues=(23..26); description='Touch-first OS launcher, navigation and accessibility' },
     @{ title='KrunchOS v0.4 - Workbench'; field='v0.4 Workbench'; issues=(27..31); description='Projects, folders, journal, schematics and architecture stories' },
