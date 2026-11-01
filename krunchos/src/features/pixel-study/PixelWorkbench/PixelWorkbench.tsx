@@ -19,8 +19,8 @@ export function PixelWorkbench() {
         <nav className="pixel-directory-sidebar" aria-label="Project folders">
           <span className="pixel-folder-heading">DRIVE C:</span>
           <strong>▾ /projects</strong>
-          <span>　▣ Featured</span>
-          <span>　▥ Experiments</span>
+          <span> ▣ Featured</span>
+          <span> ▥ Experiments</span>
           <span className="pixel-directory-divider">───</span>
           <small>SELECT A FILE TO INSPECT</small>
         </nav>
