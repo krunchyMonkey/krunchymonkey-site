@@ -72,3 +72,11 @@ Matching screenshots, passing tests, passing GitHub Actions, a real public previ
 - Run an actual fictional-data multistep workflow in the demo as an acceptance test. Keep any mock external integrations honestly labeled; do not leak private research data or integrate directly with private `tg.krunchymonkey.dev`.
 - Restrict host navigation to trusted configured sites. Cross-origin iframe navigation cannot be treated as fully controlled by the parent; the demo must cooperate with external-link policy. If an embed fails, offer a clear external fallback.
 - Keep apps independently deployed and testable. Prefer simple, typed presentation contracts over a runtime CSS injector or privileged proxy.
+
+## Pixel-first design change request (v0.1 experiment)
+
+- New [KMOS-034 #48](https://github.com/krunchyMonkey/krunchymonkey-site/issues/48) and [KMOS-035 #49](https://github.com/krunchyMonkey/krunchymonkey-site/issues/49): evaluate 8bitcn/ui and build a reversible pixel-first UX spike.
+- [Draft PR #50](https://github.com/krunchyMonkey/krunchymonkey-site/pull/50) on `experiment/krunchos-v01-8bitcn-ui` is intentionally **stacked against** `feat/krunchos-v01-foundations` (draft PR #47), not `main`.
+- Preserve the baseline v0.1 local preview at `/`, while `/?preview=8bitcn` shows the interactive comparison. The pixel design is not yet adopted or deployed.
+- Use authentic attributed upstream 8bitcn/ui Button/Card components with selective Tailwind setup and original project monkey logo; test 1440px desktop, 390px mobile, keyboard/touch and bundle impact.
+- No private genealogy, internal Tracing Guatemala server, credential, DNS, backend, Google login, or Pages changes. No merges until owner approval.
