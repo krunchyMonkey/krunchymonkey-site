@@ -36,11 +36,13 @@
 
 **Design direction:** KrunchOS turns the public personal portfolio into a simulated workstation: draggable desktop windows and folders on large screens, app launcher and full-screen app views on mobile, plus an allowlisted public-demo browser. It must remain a useful, accessible site, not just a novelty.
 
+**Pixel-first v0.1 change request:** [KMOS-034 / #48](https://github.com/krunchyMonkey/krunchymonkey-site/issues/48) evaluates selective reuse of 8bitcn/ui, and [KMOS-035 / #49](https://github.com/krunchyMonkey/krunchymonkey-site/issues/49) prototypes it in [draft PR #50](https://github.com/krunchyMonkey/krunchymonkey-site/pull/50), stacked on v0.1 feature PR #47. Direction: pixel-first website, OS-inspired interaction rather than a mandatory desktop metaphor. Treat it as an experiment, **not** an approved redesign or release. The current public Pages deploy is unchanged.
+
 **Code-craft contract:** [ENGINEERING_CHARTER.md](ENGINEERING_CHARTER.md) (proposed). New implementation must follow feature-first organization, a directory per reusable component with explicit `index.ts` exports, colocated tests, clean import boundaries, typed app contracts, and measurable quality gates. The component architecture/migration requires an ADR before framework changes.
 
 | Proposed milestone | Scope | Gate |
 |---|---|---|
-| KrunchOS v0.1 — Foundations ([#14–#17](https://github.com/krunchyMonkey/krunchymonkey-site/issues?q=is%3Aissue+KMOS-)) | Desktop/mobile UX, ADR for frontend migration and routing, typed app registry, design tokens and quality scaffolding | Reviewed UX + architecture; static preview and baseline checks pass |
+| KrunchOS v0.1 — Foundations ([#14–#17](https://github.com/krunchyMonkey/krunchymonkey-site/issues?q=is%3Aissue+KMOS-), [#48](https://github.com/krunchyMonkey/krunchymonkey-site/issues/48), [#49](https://github.com/krunchyMonkey/krunchymonkey-site/issues/49)) | Desktop/mobile UX, ADR, typed registry, quality scaffolding, **optional 8bitcn/ui pixel-first change request** | Existing foundation stays intact; pixel-first variant evaluated in isolated PR and accepted only after owner review |
 | KrunchOS v0.2 — Desktop (#18–#22) | Wallpaper, window lifecycle and dragging, dock, folder shortcuts, state persistence | Open, move, focus, minimize, close and reopen apps; keyboard tested |
 | KrunchOS v0.3 — Mobile (#23–#26) | App launcher, full-screen views, mobile dock/back navigation, touch behavior | Phone experience verified without tiny draggable windows or trapped focus |
 | KrunchOS v0.4 — Workbench (#27–#31) | Project catalog, README.me, build journal, architecture case studies and deep links | Real public content organized through the shared app model and direct links |
@@ -67,14 +69,14 @@ See [OPEN_WORKSHOP.md](OPEN_WORKSHOP.md) for the proposed community experience. 
 
 ## Repository milestone / Project #9 assignment
 
-The original 32 groomed GitHub issues plus the optional first-party presentation bridge issue #46 were created and groomed with focused acceptance criteria, verification expectations and dependency references. Because the connected GitHub integration does not expose GitHub Projects V2 mutation or milestone-creation tools, **they are not yet confirmed as Project #9 items or assigned to repository milestones**. After this documentation PR is reviewed/merged, run the idempotent local helper with authenticated GitHub CLI:
+The original 32 groomed GitHub issues, optional presentation bridge #46, and pixel-first v0.1 change requests #48–#49 were created and groomed with focused acceptance criteria, verification expectations and dependency references. Because the connected GitHub integration does not expose GitHub Projects V2 mutation or milestone-creation tools, **they are not yet confirmed as Project #9 items or assigned to repository milestones**. After this documentation PR is reviewed/merged, run the idempotent local helper with authenticated GitHub CLI:
 
 ```powershell
 pwsh -File .\\scripts\\setup-krunchos-planning.ps1 -WhatIf
 pwsh -File .\\scripts\\setup-krunchos-planning.ps1
 ```
 
-Requires `gh auth login` and `gh auth refresh -s project`. The helper creates/reuses seven repository milestones, assigns issues #14–#46, adds them to Project #9, and populates a `KrunchOS Phase` project field. It does not merge, push, publish, or modify DNS. The original 12 issues are **not** reclassified or closed by the helper.
+Requires `gh auth login` and `gh auth refresh -s project`. The helper creates/reuses seven repository milestones, assigns the 35 current issues (#14–#46, #48 and #49; #47 is a PR), adds them to Project #9, and populates a `KrunchOS Phase` project field. It does not merge, push, publish, or modify DNS. The original 12 issues are **not** reclassified or closed by the helper.
 
 ## Operating rules
 
