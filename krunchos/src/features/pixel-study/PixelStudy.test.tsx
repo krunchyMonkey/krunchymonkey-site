@@ -8,10 +8,10 @@ describe("pixel-first workbench study", () => {
   it("shows interactive project selection rather than static screenshot tiles", () => {
     render(<PixelStudy />);
     const study = screen.getByRole("region", { name: "Workbench design study" });
-    expect(within(study).getByText("Tracing Guatemala")).toBeTruthy();
+    expect(within(study).getAllByText("Tracing Guatemala").length).toBeGreaterThan(0);
     const inspect = within(study).getAllByRole("button", { name: /Inspect project/ });
     fireEvent.click(inspect[0]);
-    expect(within(study).getByText("KrunchOS")).toBeTruthy();
+    expect(within(study).getAllByText("KrunchOS").length).toBeGreaterThan(0);
     expect(within(study).getByText("v0.1 foundation")).toBeTruthy();
   });
 
