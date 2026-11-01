@@ -1,0 +1,16 @@
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+
+@theme inline {
+  --color-foreground: #201b16;
+  --color-background: #f7e8cc;
+  --color-primary: #ffc13a;
+  --color-primary-foreground: #201b16;
+  --color-secondary: #e6c895;
+  --color-secondary-foreground: #201b16;
+  --color-accent: #ffc13a;
+  --color-accent-foreground: #201b16;
+  --color-card: #f6e4c4;
+  --color-card-foreground: #201b16;
+  --color-ring: #50392a;
+}

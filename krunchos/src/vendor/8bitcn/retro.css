@@ -1,0 +1,10 @@
+.retro {
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
