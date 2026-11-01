@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { apps, getApp, type AppId } from "../../../apps/registry";
+import type { Appearance } from "../../../app/App/App";
 import { ProjectExplorer } from "../../../features/workbench/components/ProjectExplorer";
 import { OpenBench } from "../../../features/open-bench/components/OpenBench";
+import { PixelWorkbench } from "../../../features/pixel-study/PixelWorkbench";
+import { PixelOpenBench } from "../../../features/pixel-study/PixelOpenBench";
 import monkeyLogo from "../../../../../assets/krunchymonkey-logo.webp";
 
 interface MobileShellProps {
+  readonly appearance: Appearance;
   readonly activeApp: AppId | null;
   readonly onLaunch: (id: AppId) => void;
   readonly onHome: () => void;
 }
 
-export function MobileShell({ activeApp, onLaunch, onHome }: MobileShellProps) {
+export function MobileShell({ appearance, activeApp, onLaunch, onHome }: MobileShellProps) {
   const [notice, setNotice] = useState("");
 
   function open(id: AppId) {
@@ -19,7 +23,7 @@ export function MobileShell({ activeApp, onLaunch, onHome }: MobileShellProps) {
       setNotice("");
       onLaunch(id);
     } else {
-      setNotice(`${app?.title ?? "This app"} arrives in ${app?.release ?? "a future release"}.`);
+      setNotice((app?.title ?? "This app") + " arrives in " + (app?.release ?? "a future release") + ".");
     }
   }
 
@@ -27,17 +31,19 @@ export function MobileShell({ activeApp, onLaunch, onHome }: MobileShellProps) {
     <div className="mobile-shell">
       <div className="mobile-statusbar">
         <span>KrunchOS</span>
-        <span>LOCAL PREVIEW · 0.1</span>
+        <span>{appearance === "pixel" ? "PIXEL EDITION · v0.1" : "LOCAL PREVIEW · 0.1"}</span>
       </div>
       {activeApp ? (
         <>
           <header className="mobile-titlebar">
             <button type="button" onClick={onHome} aria-label="Back to home">‹</button>
             <strong>{getApp(activeApp)?.icon} {getApp(activeApp)?.title}</strong>
-            <span>···</span>
+            <span aria-hidden="true">▣</span>
           </header>
           <main className="mobile-app-content">
-            {activeApp === "workbench" ? <ProjectExplorer /> : <OpenBench />}
+            {activeApp === "workbench" ? (
+              appearance === "pixel" ? <PixelWorkbench /> : <ProjectExplorer />
+            ) : appearance === "pixel" ? <PixelOpenBench /> : <OpenBench />}
           </main>
         </>
       ) : (

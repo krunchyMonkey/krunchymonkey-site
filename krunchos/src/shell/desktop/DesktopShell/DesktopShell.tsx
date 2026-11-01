@@ -1,30 +1,34 @@
 import { useState, type Dispatch } from "react";
 import { apps, getApp, type AppId } from "../../../apps/registry";
+import type { Appearance } from "../../../app/App/App";
 import type { DesktopWindow, WindowAction } from "../../model/windowManager";
 import { Window } from "../Window";
 import { ProjectExplorer } from "../../../features/workbench/components/ProjectExplorer";
 import { OpenBench } from "../../../features/open-bench/components/OpenBench";
+import { PixelWorkbench } from "../../../features/pixel-study/PixelWorkbench";
+import { PixelOpenBench } from "../../../features/pixel-study/PixelOpenBench";
 import monkeyLogo from "../../../../../assets/krunchymonkey-logo.webp";
 
 interface DesktopShellProps {
+  readonly appearance: Appearance;
   readonly windows: readonly DesktopWindow[];
   readonly dispatch: Dispatch<WindowAction>;
   readonly onLaunch: (id: AppId) => void;
 }
 
-function Content({ id }: { readonly id: AppId }) {
-  if (id === "workbench") return <ProjectExplorer />;
-  if (id === "open-bench") return <OpenBench />;
+function Content({ id, appearance }: { readonly id: AppId; readonly appearance: Appearance }) {
+  if (id === "workbench") return appearance === "pixel" ? <PixelWorkbench /> : <ProjectExplorer />;
+  if (id === "open-bench") return appearance === "pixel" ? <PixelOpenBench /> : <OpenBench />;
   return <p>This application is still being crafted.</p>;
 }
 
-export function DesktopShell({ windows, dispatch, onLaunch }: DesktopShellProps) {
+export function DesktopShell({ appearance, windows, dispatch, onLaunch }: DesktopShellProps) {
   const [notice, setNotice] = useState("");
 
   function launch(id: AppId) {
     const app = getApp(id);
     if (!app?.available) {
-      setNotice(`${app?.title ?? "Application"} is planned for ${app?.release ?? "a future release"}.`);
+      setNotice((app?.title ?? "Application") + " is planned for " + (app?.release ?? "a future release") + ".");
       return;
     }
     setNotice("");
@@ -42,10 +46,16 @@ export function DesktopShell({ windows, dispatch, onLaunch }: DesktopShellProps)
           <button type="button" onClick={() => launch("workbench")}>Workbench</button>
           <button type="button" onClick={() => launch("open-bench")}>Open Bench</button>
         </nav>
-        <span className="system-status">LOCAL PREVIEW · v0.1</span>
+        <span className="system-status">{appearance === "pixel" ? "PIXEL EDITION · LOCAL v0.1" : "LOCAL PREVIEW · v0.1"}</span>
       </header>
-      <main className="desktop-workspace">
+      <main className="desktop-workspace" aria-label="KrunchOS desktop">
         <div className="desktop-art" aria-hidden="true">
+          <div className="pixel-scenery">
+            <div className="scenery-sun" />
+            <div className="scenery-mountain" />
+            <div className="scenery-mountain-cap" />
+            <div className="scenery-arch"><span /></div>
+          </div>
           <div className="mountain-horizon" />
           <div className="workshop-label">ORDER BENEATH THE CHAOS</div>
         </div>
@@ -66,7 +76,7 @@ export function DesktopShell({ windows, dispatch, onLaunch }: DesktopShellProps)
             onClose={() => dispatch({ type: "close", id: frame.id })}
             onMinimize={() => dispatch({ type: "minimize", id: frame.id })}
           >
-            <Content id={frame.id} />
+            <Content id={frame.id} appearance={appearance} />
           </Window>
         ))}
         <div className="desktop-toast" role="status">{notice}</div>
@@ -80,7 +90,7 @@ export function DesktopShell({ windows, dispatch, onLaunch }: DesktopShellProps)
               type="button"
               className={opened && !opened.minimized ? "dock-app is-running" : "dock-app"}
               onClick={() => launch(app.id)}
-              aria-label={`${app.title}${app.available ? "" : `, planned for ${app.release}`}`}
+              aria-label={app.title + (app.available ? "" : ", planned for " + app.release)}
             >
               <span aria-hidden="true">{app.icon}</span>
               <small>{app.title}</small>
@@ -88,7 +98,7 @@ export function DesktopShell({ windows, dispatch, onLaunch }: DesktopShellProps)
           );
         })}
       </nav>
-      <footer className="desktop-footer">KRUNCHOS LAB · NOT DEPLOYED · EXPERIMENTAL PREVIEW</footer>
+      <footer className="desktop-footer">{appearance === "pixel" ? "KRUNCHOS / WORKSHOP · 8BITCN STUDY · NOT DEPLOYED" : "KRUNCHOS LAB · NOT DEPLOYED · EXPERIMENTAL PREVIEW"}</footer>
     </div>
   );
 }

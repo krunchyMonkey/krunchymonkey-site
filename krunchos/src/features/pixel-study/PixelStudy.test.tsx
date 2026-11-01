@@ -4,28 +4,33 @@ import { PixelStudy } from "./PixelStudy";
 
 afterEach(cleanup);
 
-describe("pixel-first workbench study", () => {
-  it("shows interactive project selection rather than static screenshot tiles", () => {
+describe("pixel OS design study", () => {
+  it("boots into real OS windows and lets users inspect actual public projects", () => {
     render(<PixelStudy />);
-    const study = screen.getByRole("region", { name: "Workbench design study" });
-    expect(within(study).getAllByText("Tracing Guatemala").length).toBeGreaterThan(0);
-    const inspect = within(study).getAllByRole("button", { name: /Inspect project/ });
+    const desktop = screen.getByRole("main", { name: "KrunchOS desktop" });
+    expect(within(desktop).getByRole("region", { name: "Workbench window" })).toBeTruthy();
+    expect(within(desktop).getByRole("region", { name: "Open Bench window" })).toBeTruthy();
+    const explorer = within(desktop).getByRole("region", { name: "Project files" });
+    const inspect = within(explorer).getAllByRole("button", { name: /Inspect/ });
     fireEvent.click(inspect[0]);
-    expect(within(study).getAllByText("KrunchOS").length).toBeGreaterThan(0);
-    expect(within(study).getByText(/STATUS: v0\.1 foundation/)).toBeTruthy();
+    expect(within(desktop).getByRole("region", { name: "Selected project details" })).toBeTruthy();
   });
 
-  it("uses navigation to switch between research and Open Bench", () => {
+  it("minimizes and restores the Workbench through the dock", () => {
     render(<PixelStudy />);
-    const nav = screen.getByRole("navigation", { name: "Pixel study navigation" });
-    fireEvent.click(within(nav).getByRole("button", { name: "Research" }));
-    expect(screen.getByRole("region", { name: "Research project design study" })).toBeTruthy();
-    fireEvent.click(within(nav).getByRole("button", { name: "Open Bench" }));
-    expect(screen.getByRole("region", { name: "Open Bench design study" })).toBeTruthy();
+    const desktop = screen.getByRole("main", { name: "KrunchOS desktop" });
+    const workbench = within(desktop).getByRole("region", { name: "Workbench window" });
+    fireEvent.click(within(workbench).getByRole("button", { name: "Minimize Workbench" }));
+    expect(within(desktop).queryByRole("region", { name: "Workbench window" })).toBeNull();
+    const dock = screen.getByRole("navigation", { name: "Application dock" });
+    fireEvent.click(within(dock).getByRole("button", { name: "Workbench" }));
+    expect(within(desktop).getByRole("region", { name: "Workbench window" })).toBeTruthy();
   });
 
-  it("provides a direct way back to the baseline v0.1 preview", () => {
+  it("offers an OS app launcher for mobile", () => {
     render(<PixelStudy />);
-    expect(screen.getByRole("link", { name: /Original v0.1 preview/ }).getAttribute("href")).toBe("./");
+    const nav = screen.getByRole("navigation", { name: "Mobile applications" });
+    expect(within(nav).getByRole("button", { name: /Workbench/ })).toBeTruthy();
+    expect(within(nav).getByRole("button", { name: /Open Bench/ })).toBeTruthy();
   });
 });
