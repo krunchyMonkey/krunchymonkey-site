@@ -12,7 +12,7 @@ describe("pixel-first workbench study", () => {
     const inspect = within(study).getAllByRole("button", { name: /Inspect project/ });
     fireEvent.click(inspect[0]);
     expect(within(study).getAllByText("KrunchOS").length).toBeGreaterThan(0);
-    expect(within(study).getByText("v0.1 foundation")).toBeTruthy();
+    expect(within(study).getByText(/STATUS: v0\.1 foundation/)).toBeTruthy();
   });
 
   it("uses navigation to switch between research and Open Bench", () => {
