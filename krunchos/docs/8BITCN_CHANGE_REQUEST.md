@@ -1,37 +1,35 @@
-# Design change request — 8bitcn/ui pixel-first experiment
+# Design change request — 8bitcn/ui inside KrunchOS
 
-**Issues:** KMOS-034 (#48), KMOS-035 (#49)
-**Phase:** v0.1 Foundations
-**Status:** Experimental / not adopted / not deployed.
-**Branch:** \`experiment/krunchos-v01-8bitcn-ui\` based on \`feat/krunchos-v01-foundations\`.
+**Issues:** KMOS-034 (#48), KMOS-035 (#49)  
+**Phase:** v0.1 Foundations  
+**State:** Experimental, not approved or deployed  
+**PR:** #50, stacked against the foundation PR #47
 
-## Product hypothesis
+## Revised product decision
 
-A **pixel-first website** with optional desktop motifs is a stronger visual identity than requiring every route to behave like an operating system. The OS still makes opening first-party public apps fun. Its website, desktop, and mobile share the same real interfaces and reusable design tokens.
+The first 8bitcn/ui prototype rendered as a conventional marketing SPA. Owner feedback: it looked too much like a webpage rather than an operating system. **Correct approach: retain the existing functional KrunchOS desktop/mobile OS shell and window manager, and use pixel-styled 8bitcn/ui components *inside* apps.**
 
-## Scope of this spike
+## Comparison URLs
 
-- Keep the existing v0.1 desktop preview untouched at \`/\`.
-- Add a **separate route variant**, \`/?preview=8bitcn\`, with a pixel-first landing page, Workbench project inspector, public Research project details, and Open Bench story.
-- Pilot real upstream-adapted MIT 8bitcn/ui Button and Card source. Local shadcn adapters provide only the supported subset. Compare with existing plain CSS for maintainability.
-- Use Tailwind utilities **without globally importing Preflight/reset**, reducing risk of breaking the preexisting OS CSS.
-- Reuse original logo from \`assets/krunchymonkey-logo.webp\`; no copied concept screenshots, fictional user metrics, private genealogy data, or remote APIs.
-- Show **actual interactive selection and navigation**, not fake application activity. Fully functional first-party demos remain a later v0.5 deliverable.
-- No network font dependency; use an intentionally ordinary local monospace fallback. A licensed self-hosted pixel font may be evaluated later.
+- `/`: untouched baseline v0.1 OS styling.
+- `/?preview=8bitcn`: pixel-edition OS shell with actual windows, desktop shortcuts, menu bar, dock, app launcher, and 8bitcn/ui Workbench / Open Bench.
 
-## Evaluation matrix
+## Design and implementation
 
-| Criterion | What to inspect |
-|---|---|
-| Visual | Screen captures at 1440px desktop and 390px mobile; layout, color, feel vs approved mockups |
-| UX | Keyboard tab/focus, touch targets, readability and content clarity |
-| Engineering | Component source ownership, strict types, API clarity, test complexity |
-| Toolchain | Added Tailwind + Radix/shadcn dependency surface, bundle size and update path |
-| Security | First-party content only; no private app or new deployment |
-| Reversibility | Remove \`?preview=8bitcn\` feature, vendor components, and Tailwind plugin; baseline remains unchanged |
+- Pixel variant reuses the existing reducer for window open, focus, close, move, minimize and restore. There is **no second window manager**.
+- Default desktop boots with two overlapping windows; mobile boots to an app launcher, then full-screen OS application views.
+- 8bitcn Button/Card source is adapted under `src/vendor/8bitcn`, preserving upstream attribution and MIT terms in `THIRD_PARTY_8BITCN.md`. No remote font request.
+- Public content only, original monkey logo, stylized CSS Guatemalan-inspired landscape, no live/embedded private genealogy app.
+- **Not implemented in this spike:** resizing, a full Code Explorer, public demo browser, real terminal, login or community contribution workflow. Disabled/future apps remain clearly indicated.
 
-## Recommendation criteria
+## Acceptance and follow-up
 
-Adopt selectively **only if** the interactive pixel study is visibly closer to owner-approved references, works on both viewports, and the maintenance overhead is justified. Do not migrate existing project logic or private Tracing Guatemala UI as part of this experiment.
+- Verify TypeScript, lint, tests, build, and original static-site validation in GitHub Actions.
+- Manually capture/review desktop 1440×900 and mobile 390×844; visually inspect window placement, typography, scrolling and tap targets.
+- Desktop Workbench and Open Bench can be minimized, restored, closed and focused; app selection changes inspector content. Mobile can launch an app and return home.
+- Review accessibility (keyboard focus, reduced motion, touch sizes) and compare bundle impact before adoption.
+- Keep PR #50 draft and stacked; no merge, Pages deployment, DNS, server or Tracing Guatemala changes.
 
-The study's PR should target the **v0.1 feature branch**, not \`main\`. Review, merge and deployment remain explicit owner decisions.
+## Rollback
+
+Remove the `?preview=8bitcn` entry point, pixel UI files and vendor components. The original v0.1 OS preview remains separate.
