@@ -8,13 +8,13 @@ import { PixelOpenBench } from "../../../features/pixel-study/PixelOpenBench";
 import monkeyLogo from "../../../../../assets/krunchymonkey-logo.webp";
 
 interface MobileShellProps {
-  readonly appearance: Appearance;
+  readonly appearance?: Appearance;
   readonly activeApp: AppId | null;
   readonly onLaunch: (id: AppId) => void;
   readonly onHome: () => void;
 }
 
-export function MobileShell({ appearance, activeApp, onLaunch, onHome }: MobileShellProps) {
+export function MobileShell({ appearance = "classic", activeApp, onLaunch, onHome }: MobileShellProps) {
   const [notice, setNotice] = useState("");
 
   function open(id: AppId) {
