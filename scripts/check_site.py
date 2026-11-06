@@ -82,6 +82,16 @@ def main():
         for forbidden in ("CLOUDFLARE_API_TOKEN", "-----BEGIN PRIVATE KEY-----", "ghp_", "sk-"):
             if forbidden.lower() in content.lower():
                 problems.append(f"Potential secret/config reference in {page.relative_to(ROOT)}: {forbidden[:8]}")
+    # The public demo entry may link only to the verified standalone demo, never to the private application.
+    demo_url = "https://krunchymonkey.github.io/tracing-guatemala-desktop/"
+    for page, doc in docs.items():
+        for kind, target in doc.links:
+            if "tg.krunchymonkey.dev" in target.lower():
+                problems.append(f"Private application link in {page.relative_to(ROOT)}: {target}")
+    demo_doc = docs[ROOT / "tracing-guatemala/demo/index.html"]
+    external = [t for k, t in demo_doc.links if urlsplit(t).scheme in ("http", "https") and "github.com/krunchyMonkey" not in t]
+    if any(t != demo_url for t in external):
+        problems.append(f"Demo page links to an unapproved external URL: {[t for t in external if t != demo_url]}")
     if problems:
         print("Static site checks failed:", *[f"- {p}" for p in problems], sep="\n", file=sys.stderr)
         raise SystemExit(1)
