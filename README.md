@@ -18,6 +18,7 @@ Open <http://localhost:8000/>. The site is plain HTML + CSS, so there is **no np
 |---|---|---|
 | `/` | KrunchyMonkey studio homepage | Mockup baseline |
 | `/tracing-guatemala/` | Public overview of the private research product | Mockup baseline |
+| `/tracing-guatemala/demo/` | Stable branded entry for a separate fictional-only interactive demo | Coming soon; no destination until standalone release is verified |
 | `/tracing-guatemala/privacy/` | Proposed privacy information | **Draft / review required** |
 
 ## Design contract
