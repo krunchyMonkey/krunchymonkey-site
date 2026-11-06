@@ -32,8 +32,9 @@
 ## Public demo entry route
 
 - `/tracing-guatemala/demo/` is the branded entry page for the separate, fictional-only Tracing Guatemala demo. It must not route to private Live, use client records, or host the demo's backend.
-- The landing stays **Coming soon** until the standalone GitHub Pages demo is deployed and its source/permission/security acceptance in [Tracing Guatemala #190–#192](https://github.com/krunchyMonkey/tracing-guatemala-desktop/issues/189) is verified and owner-approved.
-- After approval, replace the placeholder with a clearly labeled public **Launch interactive demo** link to the verified `*.github.io` standalone URL (or an explicit safe redirect). Never infer the destination from user-controlled parameters, and do not iframe the private site.
+- **LIVE since 2026-11-06 (PR #53).** The page links **Launch Interactive Demo** to the verified standalone demo `https://krunchymonkey.github.io/tracing-guatemala-desktop/`. That demo is published by the owner-approved Tracing Guatemala Pages workflow ([#192](https://github.com/krunchyMonkey/tracing-guatemala-desktop/issues/192)); first release `005b943`.
+- `scripts/check_site.py` rejects any `tg.krunchymonkey.dev` link, and any external link on the demo page other than that exact URL. Never infer the destination from user-controlled parameters, and do not iframe the private site.
+- To take the demo offline, unpublish it in the Tracing Guatemala repo (see its `docs/operations/public-demo-pages.md`), then restore the Coming soon copy here.
 - The public website must not share sessions, cookies, resources or identity endpoints with the private research workspace. Do not change Cloudflare or the private `tg` DNS record for this feature.
 
 ## What constitutes completion
