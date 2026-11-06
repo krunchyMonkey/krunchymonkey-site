@@ -6,7 +6,7 @@
 
 - `README.md`, `docs/DESIGN_PARITY.md`, `docs/ROADMAP.md`, `docs/DEPLOYMENT.md`
 - `docs/reference/*.png` (golden review images)
-- `index.html`, `assets/site.css`, `tracing-guatemala/index.html`, `tracing-guatemala/privacy/index.html`
+- `index.html`, `assets/site.css`, `tracing-guatemala/index.html`, `tracing-guatemala/demo/index.html`, `tracing-guatemala/privacy/index.html`
 - Current GitHub Issues `[KM-001]` through `[KM-012]`; inspect open PRs and branch status first.
 
 ## Technical direction
