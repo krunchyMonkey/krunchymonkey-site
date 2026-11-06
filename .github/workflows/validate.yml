@@ -22,4 +22,5 @@ jobs:
           find dist -type f -print | sort
           test -f dist/index.html
           test -f dist/tracing-guatemala/privacy/index.html
+          test -f dist/tracing-guatemala/demo/index.html
           test -f dist/assets/krunchymonkey-logo.webp
