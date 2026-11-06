@@ -24,7 +24,9 @@
 
 ## Tracing Guatemala public demo entry (no DNS changes)
 
-1. The public KrunchyMonkey website includes the stable route `/tracing-guatemala/demo/`. Its initial state is an honest **Coming soon** page, linked from the Tracing Guatemala product overview; do not publish a broken demo URL.
+**Status (2026-11-06): steps 1–5 are complete.** The route links to `https://krunchymonkey.github.io/tracing-guatemala-desktop/` (PR #53) and was verified on desktop and phone after publication.
+
+1. The public KrunchyMonkey website includes the stable route `/tracing-guatemala/demo/`. Its initial state was an honest **Coming soon** page, linked from the Tracing Guatemala product overview; do not publish a broken demo URL.
 2. Independently complete Tracing Guatemala's [Phase 2.9 #190 CI](https://github.com/krunchyMonkey/tracing-guatemala-desktop/issues/190), [#191 fictional-only artifact verification](https://github.com/krunchyMonkey/tracing-guatemala-desktop/issues/191) and [#192 public GitHub Pages release](https://github.com/krunchyMonkey/tracing-guatemala-desktop/issues/192). Owner approval for first public exposure and a successful independent security smoke test are required.
 3. After the verified static demo is live on its own `*.github.io` origin, replace the placeholder content in `tracing-guatemala/demo/index.html` with a **Launch interactive demo** link to that exact reviewed HTTPS URL. Preserve meaningful fallback and an explicit statement that sample data resets and no private real records are accessible.
 4. Run `python3 scripts/check_site.py` and `python3 scripts/build_site.py`; verify `dist/tracing-guatemala/demo/index.html` is included, all internal links resolve, the standalone origin is an allowlisted static public one, and the rendered page works on desktop/mobile.
