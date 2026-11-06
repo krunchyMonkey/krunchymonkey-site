@@ -5,7 +5,7 @@ from urllib.parse import urlsplit, unquote
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = [ROOT / "index.html", ROOT / "tracing-guatemala/index.html", ROOT / "tracing-guatemala/privacy/index.html"]
+PAGES = [ROOT / "index.html", ROOT / "tracing-guatemala/index.html", ROOT / "tracing-guatemala/demo/index.html", ROOT / "tracing-guatemala/privacy/index.html"]
 ASSETS = [ROOT / "assets/site.css", ROOT / "assets/favicon.png", ROOT / "assets/krunchymonkey-logo.webp"]
 
 class Document(HTMLParser):
