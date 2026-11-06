@@ -11,6 +11,7 @@ PUBLISH_FILES = [
     "assets/favicon.png",
     "assets/krunchymonkey-logo.webp",
     "tracing-guatemala/index.html",
+    "tracing-guatemala/demo/index.html",
     "tracing-guatemala/privacy/index.html",
 ]
 
