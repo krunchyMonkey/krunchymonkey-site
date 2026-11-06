@@ -40,7 +40,7 @@ python scripts/check_site.py
 python scripts/build_site.py
 ```
 
-`build_site.py` creates a **seven-file allowlist-only** deployment artifact in `dist/`. Docs, original high-resolution assets, mockup screenshots, issues, and local files aren't deployed. This is deliberately separate from the private Tracing Guatemala repository.
+`build_site.py` creates a **eight-file allowlist-only** deployment artifact in `dist/`. Docs, original high-resolution assets, mockup screenshots, issues, and local files aren't deployed. This is deliberately separate from the private Tracing Guatemala repository.
 
 ## Create the GitHub repo + Project + issues
 
