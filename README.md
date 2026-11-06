@@ -18,6 +18,7 @@ Open <http://localhost:8000/>. The site is plain HTML + CSS, so there is **no np
 |---|---|---|
 | `/` | KrunchyMonkey studio homepage | Mockup baseline |
 | `/tracing-guatemala/` | Public overview of the private research product | Mockup baseline |
+| `/tracing-guatemala/demo/` | Stable branded entry for a separate fictional-only interactive demo | Coming soon; no destination until standalone release is verified |
 | `/tracing-guatemala/privacy/` | Proposed privacy information | **Draft / review required** |
 
 ## Design contract
@@ -39,7 +40,7 @@ python scripts/check_site.py
 python scripts/build_site.py
 ```
 
-`build_site.py` creates a **seven-file allowlist-only** deployment artifact in `dist/`. Docs, original high-resolution assets, mockup screenshots, issues, and local files aren't deployed. This is deliberately separate from the private Tracing Guatemala repository.
+`build_site.py` creates a **eight-file allowlist-only** deployment artifact in `dist/`. Docs, original high-resolution assets, mockup screenshots, issues, and local files aren't deployed. This is deliberately separate from the private Tracing Guatemala repository.
 
 ## Create the GitHub repo + Project + issues
 

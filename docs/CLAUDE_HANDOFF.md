@@ -6,7 +6,7 @@
 
 - `README.md`, `docs/DESIGN_PARITY.md`, `docs/ROADMAP.md`, `docs/DEPLOYMENT.md`
 - `docs/reference/*.png` (golden review images)
-- `index.html`, `assets/site.css`, `tracing-guatemala/index.html`, `tracing-guatemala/privacy/index.html`
+- `index.html`, `assets/site.css`, `tracing-guatemala/index.html`, `tracing-guatemala/demo/index.html`, `tracing-guatemala/privacy/index.html`
 - Current GitHub Issues `[KM-001]` through `[KM-012]`; inspect open PRs and branch status first.
 
 ## Technical direction
@@ -28,6 +28,13 @@
 - Privacy notice is explicitly **draft** until owner/legal/product review confirms actual scopes, operators, retention, deletion, contact information and environment.
 - Google login belongs in `tracing-guatemala-desktop`; it requires separate app authorization and approved Google identities. The public site may provide branding/info URLs but is NOT an OAuth redirect proxy or credential handler.
 - `tg.krunchymonkey.dev` stays on private DNS. The public apex alone may point to GitHub Pages after owner approval.
+
+## Public demo entry route
+
+- `/tracing-guatemala/demo/` is the branded entry page for the separate, fictional-only Tracing Guatemala demo. It must not route to private Live, use client records, or host the demo's backend.
+- The landing stays **Coming soon** until the standalone GitHub Pages demo is deployed and its source/permission/security acceptance in [Tracing Guatemala #190–#192](https://github.com/krunchyMonkey/tracing-guatemala-desktop/issues/189) is verified and owner-approved.
+- After approval, replace the placeholder with a clearly labeled public **Launch interactive demo** link to the verified `*.github.io` standalone URL (or an explicit safe redirect). Never infer the destination from user-controlled parameters, and do not iframe the private site.
+- The public website must not share sessions, cookies, resources or identity endpoints with the private research workspace. Do not change Cloudflare or the private `tg` DNS record for this feature.
 
 ## What constitutes completion
 
