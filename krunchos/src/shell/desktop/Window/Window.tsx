@@ -64,6 +64,7 @@ export function Window({ window: frame, children, onMove, onFocus, onClose, onMi
       }}
       role="region"
       aria-label={`${app?.title ?? "Unknown"} window`}
+      hidden={frame.minimized}
       onPointerDown={onFocus}
     >
       <header className="window-titlebar">
