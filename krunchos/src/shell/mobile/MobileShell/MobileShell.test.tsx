@@ -9,7 +9,14 @@ describe("MobileShell", () => {
     const onLaunch = vi.fn();
     const onHome = vi.fn();
     const { rerender } = render(
-      <MobileShell activeApp={null} onLaunch={onLaunch} onHome={onHome} renderApp={() => null} />,
+      <MobileShell
+        activeApp={null}
+        onLaunch={onLaunch}
+        onHome={onHome}
+        notice=""
+        onNotice={vi.fn()}
+        renderApp={() => null}
+      />,
     );
 
     const launcher = screen.getByRole("navigation", { name: "Mobile applications" });
@@ -21,6 +28,8 @@ describe("MobileShell", () => {
         activeApp="workbench"
         onLaunch={onLaunch}
         onHome={onHome}
+        notice=""
+        onNotice={vi.fn()}
         renderApp={() => null}
       />,
     );
@@ -30,13 +39,21 @@ describe("MobileShell", () => {
 
   it("does not launch an unfinished application", () => {
     const onLaunch = vi.fn();
-    const { container } = render(
-      <MobileShell activeApp={null} onLaunch={onLaunch} onHome={vi.fn()} renderApp={() => null} />,
+    const onNotice = vi.fn();
+    render(
+      <MobileShell
+        activeApp={null}
+        onLaunch={onLaunch}
+        onHome={vi.fn()}
+        notice=""
+        onNotice={onNotice}
+        renderApp={() => null}
+      />,
     );
 
     const launcher = screen.getByRole("navigation", { name: "Mobile applications" });
     fireEvent.click(within(launcher).getByRole("button", { name: "Browser" }));
     expect(onLaunch).not.toHaveBeenCalled();
-    expect(container.querySelector(".mobile-notice")?.textContent).toContain("v0.5");
+    expect(onNotice).toHaveBeenCalledWith("Browser arrives in v0.5.");
   });
 });
