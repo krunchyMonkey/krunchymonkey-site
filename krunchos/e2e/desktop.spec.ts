@@ -113,10 +113,6 @@ test.describe("window management", () => {
   });
 
   test("restoring a minimized window keeps its application state", async ({ page }) => {
-    test.fail(
-      true,
-      "Known defect: minimizing unmounts the window, so restore loses app state (KMOS-007 #20).",
-    );
     const os = desktopShell(page);
     const workbench = os.window("Workbench");
 
@@ -126,9 +122,6 @@ test.describe("window management", () => {
 
     await expect(workbench.getByRole("region", { name: "Selected project details" })).toContainText(
       "Data Sketches",
-      {
-        timeout: 2_000,
-      },
     );
   });
 

@@ -27,6 +27,20 @@ describe("pixel OS design study", () => {
     expect(within(desktop).getByRole("region", { name: "Workbench window" })).toBeTruthy();
   });
 
+  it("keeps the selected project when a minimized Workbench is restored", () => {
+    render(<PixelStudy />);
+    const desktop = screen.getByRole("main", { name: "KrunchOS desktop" });
+    const workbench = within(desktop).getByRole("region", { name: "Workbench window" });
+    fireEvent.click(within(workbench).getByRole("button", { name: "Inspect Data Sketches" }));
+    fireEvent.click(within(workbench).getByRole("button", { name: "Minimize Workbench" }));
+    const dock = screen.getByRole("navigation", { name: "Application dock" });
+    fireEvent.click(within(dock).getByRole("button", { name: "Workbench" }));
+    const restored = within(desktop).getByRole("region", { name: "Workbench window" });
+    expect(
+      within(restored).getByRole("button", { name: "Inspect Data Sketches" }).getAttribute("aria-pressed"),
+    ).toBe("true");
+  });
+
   it("offers an OS app launcher for mobile", () => {
     render(<PixelStudy />);
     const nav = screen.getByRole("navigation", { name: "Mobile applications" });

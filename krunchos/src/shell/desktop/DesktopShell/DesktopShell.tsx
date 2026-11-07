@@ -67,7 +67,7 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
             </button>
           ))}
         </nav>
-        {windows.filter((frame) => !frame.minimized).map((frame) => (
+        {windows.map((frame) => (
           <Window
             key={frame.id}
             window={frame}

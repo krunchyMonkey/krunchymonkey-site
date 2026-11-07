@@ -49,10 +49,9 @@ WebKit runs the mobile behavior specs but has no screenshot baselines: one pinne
 
 **Known gaps (`test.fail`)**: these tests describe the correct behavior and are expected to fail until the linked issue is fixed. If one starts passing, Playwright reports it as a failure, so the marker has to be removed in the fixing PR.
 
-| Test                                                     | Tracking issue |
-| -------------------------------------------------------- | -------------- |
-| Restoring a minimized window keeps its application state | KMOS-007 #20   |
-| Browser back returns from a mobile app to the launcher   | KMOS-011 #24   |
+| Test                                                   | Tracking issue |
+| ------------------------------------------------------ | -------------- |
+| Browser back returns from a mobile app to the launcher | KMOS-011 #24   |
 
 ## Visual regression
 
