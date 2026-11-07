@@ -1,0 +1,32 @@
+name: Pages migration PoC
+
+on:
+  pull_request:
+    paths:
+      - scripts/pages_poc.py
+      - scripts/test_pages_poc.py
+      - scripts/build_site.py
+      - .github/workflows/pages-migration-poc.yml
+
+permissions:
+  contents: read
+
+jobs:
+  poc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Unit tests
+        run: python3 -m unittest scripts/test_pages_poc.py -v
+      - name: Assemble and verify custom-domain base
+        run: |
+          python3 scripts/pages_poc.py assemble --out "$RUNNER_TEMP/site-root" --base /
+          python3 scripts/pages_poc.py verify "$RUNNER_TEMP/site-root" --prefix /
+      - name: Assemble and verify project-path base
+        run: |
+          python3 scripts/pages_poc.py assemble --out "$RUNNER_TEMP/site-project" --base /krunchymonkey-site/
+          python3 scripts/pages_poc.py verify "$RUNNER_TEMP/site-project" --prefix /krunchymonkey-site/
+      - name: Manifest
+        run: python3 scripts/pages_poc.py manifest "$RUNNER_TEMP/site-root"
