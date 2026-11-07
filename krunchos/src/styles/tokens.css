@@ -691,8 +691,8 @@ p {
     border: 2px solid var(--os-edge);
     font-size: 25px;
     font-weight: 900;
-    min-width: 38px;
-    min-height: 35px;
+    min-width: 44px;
+    min-height: 44px;
   }
   .mobile-titlebar strong {
     font-size: 15px;
