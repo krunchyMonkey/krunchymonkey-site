@@ -10,7 +10,13 @@ function renderShell(minimized: boolean | null) {
       ? []
       : [{ id: "workbench" as const, x: 0, y: 0, width: 500, height: 400, zIndex: 1, minimized }];
   render(
-    <DesktopShell appearance="classic" windows={windows} dispatch={vi.fn()} onLaunch={vi.fn()} />,
+    <DesktopShell
+      appearance="classic"
+      windows={windows}
+      dispatch={vi.fn()}
+      onLaunch={vi.fn()}
+      renderApp={() => null}
+    />,
   );
   return screen.getByRole("navigation", { name: "Application dock" });
 }

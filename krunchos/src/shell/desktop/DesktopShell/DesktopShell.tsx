@@ -1,11 +1,8 @@
 import { useState, type Dispatch } from "react";
-import { apps, getApp, type AppId } from "../../../apps";
+import { apps, getApp, withCapability, type AppId } from "../../../apps";
 import { PixelIcon } from "../../../components/PixelIcon";
-import type { Appearance, DesktopWindow, WindowAction } from "../../model";
+import type { AppRenderer, Appearance, DesktopWindow, WindowAction } from "../../model";
 import { Window } from "../Window";
-import { ProjectExplorer } from "../../../features/workbench";
-import { OpenBench } from "../../../features/open-bench";
-import { PixelOpenBench, PixelWorkbench } from "../../../features/pixel-study";
 import monkeyLogo from "../../../../../assets/krunchymonkey-logo.webp";
 
 interface DesktopShellProps {
@@ -13,15 +10,16 @@ interface DesktopShellProps {
   readonly windows: readonly DesktopWindow[];
   readonly dispatch: Dispatch<WindowAction>;
   readonly onLaunch: (id: AppId) => void;
+  readonly renderApp: AppRenderer;
 }
 
-function Content({ id, appearance }: { readonly id: AppId; readonly appearance: Appearance }) {
-  if (id === "workbench") return appearance === "pixel" ? <PixelWorkbench /> : <ProjectExplorer />;
-  if (id === "open-bench") return appearance === "pixel" ? <PixelOpenBench /> : <OpenBench />;
-  return <p>This application is still being crafted.</p>;
-}
-
-export function DesktopShell({ appearance, windows, dispatch, onLaunch }: DesktopShellProps) {
+export function DesktopShell({
+  appearance,
+  windows,
+  dispatch,
+  onLaunch,
+  renderApp,
+}: DesktopShellProps) {
   const [notice, setNotice] = useState("");
 
   function launch(id: AppId) {
@@ -47,12 +45,11 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
           <strong>KrunchOS</strong>
         </div>
         <nav className="system-menus" aria-label="Workstation menus">
-          <button type="button" onClick={() => launch("workbench")}>
-            Workbench
-          </button>
-          <button type="button" onClick={() => launch("open-bench")}>
-            Open Bench
-          </button>
+          {withCapability("menu-bar").map((app) => (
+            <button key={app.id} type="button" onClick={() => launch(app.id)}>
+              {app.title}
+            </button>
+          ))}
         </nav>
         <span className="system-status">
           {appearance === "pixel" ? "PIXEL EDITION · LOCAL v0.1" : "LOCAL PREVIEW · v0.1"}
@@ -72,21 +69,19 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
           <div className="workshop-label">ORDER BENEATH THE CHAOS</div>
         </div>
         <nav className="desktop-shortcuts" aria-label="Desktop shortcuts">
-          {apps
-            .filter((app) => ["workbench", "projects", "journal", "open-bench"].includes(app.id))
-            .map((app) => (
-              <button
-                key={app.id}
-                className="desktop-shortcut"
-                type="button"
-                onClick={() => launch(app.id)}
-              >
-                <span className="shortcut-icon" aria-hidden="true">
-                  <PixelIcon name={app.icon} />
-                </span>
-                <span>{app.title}</span>
-              </button>
-            ))}
+          {withCapability("desktop-shortcut").map((app) => (
+            <button
+              key={app.id}
+              className="desktop-shortcut"
+              type="button"
+              onClick={() => launch(app.id)}
+            >
+              <span className="shortcut-icon" aria-hidden="true">
+                <PixelIcon name={app.icon} />
+              </span>
+              <span>{app.title}</span>
+            </button>
+          ))}
         </nav>
         {windows.map((frame) => (
           <Window
@@ -97,7 +92,7 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
             onClose={() => dispatch({ type: "close", id: frame.id })}
             onMinimize={() => dispatch({ type: "minimize", id: frame.id })}
           >
-            <Content id={frame.id} appearance={appearance} />
+            {renderApp(frame.id)}
           </Window>
         ))}
         <div className="desktop-toast" role="status">

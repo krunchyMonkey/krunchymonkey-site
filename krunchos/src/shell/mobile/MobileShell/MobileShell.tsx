@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { apps, getApp, type AppId } from "../../../apps";
+import { apps, getApp, withCapability, type AppId } from "../../../apps";
 import { PixelIcon } from "../../../components/PixelIcon";
-import type { Appearance } from "../../model";
-import { ProjectExplorer } from "../../../features/workbench";
-import { OpenBench } from "../../../features/open-bench";
-import { PixelOpenBench, PixelWorkbench } from "../../../features/pixel-study";
+import type { AppRenderer, Appearance } from "../../model";
 import monkeyLogo from "../../../../../assets/krunchymonkey-logo.webp";
 
 interface MobileShellProps {
@@ -12,6 +9,7 @@ interface MobileShellProps {
   readonly activeApp: AppId | null;
   readonly onLaunch: (id: AppId) => void;
   readonly onHome: () => void;
+  readonly renderApp: AppRenderer;
 }
 
 export function MobileShell({
@@ -19,6 +17,7 @@ export function MobileShell({
   activeApp,
   onLaunch,
   onHome,
+  renderApp,
 }: MobileShellProps) {
   const [notice, setNotice] = useState("");
 
@@ -55,19 +54,7 @@ export function MobileShell({
               <PixelIcon name="projects" />
             </span>
           </header>
-          <main className="mobile-app-content">
-            {activeApp === "workbench" ? (
-              appearance === "pixel" ? (
-                <PixelWorkbench />
-              ) : (
-                <ProjectExplorer />
-              )
-            ) : appearance === "pixel" ? (
-              <PixelOpenBench />
-            ) : (
-              <OpenBench />
-            )}
-          </main>
+          <main className="mobile-app-content">{renderApp(activeApp)}</main>
         </>
       ) : (
         <main className="mobile-home">
@@ -97,12 +84,16 @@ export function MobileShell({
         <button type="button" onClick={onHome} aria-label="Home">
           <PixelIcon name="home" />
         </button>
-        <button type="button" onClick={() => open("workbench")} aria-label="Open Workbench">
-          <PixelIcon name="workbench" />
-        </button>
-        <button type="button" onClick={() => open("open-bench")} aria-label="Open Bench">
-          <PixelIcon name="open-bench" />
-        </button>
+        {withCapability("mobile-dock").map((app) => (
+          <button
+            key={app.id}
+            type="button"
+            onClick={() => open(app.id)}
+            aria-label={app.launchLabel}
+          >
+            <PixelIcon name={app.icon} />
+          </button>
+        ))}
       </nav>
       <div className="mobile-home-indicator" aria-hidden="true" />
     </div>

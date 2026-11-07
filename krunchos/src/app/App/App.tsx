@@ -1,5 +1,6 @@
 import { useReducer, useState } from "react";
 import { getApp, type AppId } from "../../apps";
+import { renderApp } from "./appViews";
 import { DesktopShell } from "../../shell/desktop/DesktopShell";
 import { MobileShell } from "../../shell/mobile/MobileShell";
 import {
@@ -41,11 +42,13 @@ export function App({ appearance = "classic" }: AppProps) {
         windows={windowState.windows}
         dispatch={dispatch}
         onLaunch={openApp}
+        renderApp={(id) => renderApp(id, appearance)}
       />
       <MobileShell
         appearance={appearance}
         activeApp={mobileAppId}
         onLaunch={openApp}
+        renderApp={(id) => renderApp(id, appearance)}
         onHome={() => setMobileAppId(null)}
       />
     </div>
