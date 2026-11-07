@@ -47,6 +47,14 @@ jobs:
         run: npm test
       - name: Build local preview artifact
         run: npm run build
+      - name: Check static public artifact
+        run: npm run check:dist -- --json dist-manifest.json
+      - name: Upload dist manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: krunchos-dist-manifest
+          path: krunchos/dist-manifest.json
+          retention-days: 7
 
   e2e:
     if: github.event.action != 'labeled'
