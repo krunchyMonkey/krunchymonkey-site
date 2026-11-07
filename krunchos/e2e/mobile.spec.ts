@@ -1,5 +1,13 @@
 import type { Locator, Page } from "@playwright/test";
-import { PIXEL_OS_PATH, bootKrunchOS, expect, imageIsLoaded, mobileShell, test } from "./fixtures";
+import {
+  FALLBACK_FONT_GLYPHS,
+  PIXEL_OS_PATH,
+  bootKrunchOS,
+  expect,
+  imageIsLoaded,
+  mobileShell,
+  test,
+} from "./fixtures";
 
 const MIN_TOUCH_TARGET = 24;
 const COMFORTABLE_TOUCH_TARGET = 44;
@@ -68,6 +76,21 @@ test.describe("launcher", () => {
     await expect(page.getByRole("region", { name: /window$/ })).toHaveCount(0);
   });
 
+  test("draws icons as owned svg instead of fallback-font glyphs", async ({ page }) => {
+    const mobile = mobileShell(page);
+    expect(await page.locator("body").innerText()).not.toMatch(FALLBACK_FONT_GLYPHS);
+
+    for (const group of [mobile.launcher, mobile.dock]) {
+      for (const button of await group.getByRole("button").all()) {
+        await expect(button.locator('svg[aria-hidden="true"]')).toHaveCount(1);
+      }
+    }
+
+    await mobile.launcher.getByRole("button", { name: "Workbench" }).tap();
+    expect(await page.locator("body").innerText()).not.toMatch(FALLBACK_FONT_GLYPHS);
+    await expect(mobile.app.locator('svg[aria-hidden="true"]').first()).toBeVisible();
+  });
+
   test("fits the viewport with usable, non-overlapping tap targets", async ({ page }) => {
     const mobile = mobileShell(page);
     await expectNoHorizontalOverflow(page);
@@ -92,7 +115,7 @@ test.describe("app navigation", () => {
 
     await expect(mobile.launcher).toBeHidden();
     await expect(mobile.back).toBeVisible();
-    await expect(mobile.app.getByText("▣ WORKBENCH / PROJECT FILES")).toBeVisible();
+    await expect(mobile.app.getByText("WORKBENCH / PROJECT FILES")).toBeVisible();
 
     const files = page.getByRole("region", { name: "Project files" });
     const lastProject = files.getByRole("button", { name: "Inspect Data Sketches" });

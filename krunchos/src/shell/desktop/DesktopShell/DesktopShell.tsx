@@ -1,5 +1,6 @@
 import { useState, type Dispatch } from "react";
 import { apps, getApp, type AppId } from "../../../apps";
+import { PixelIcon } from "../../../components/PixelIcon";
 import type { Appearance, DesktopWindow, WindowAction } from "../../model";
 import { Window } from "../Window";
 import { ProjectExplorer } from "../../../features/workbench";
@@ -81,7 +82,7 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
                 onClick={() => launch(app.id)}
               >
                 <span className="shortcut-icon" aria-hidden="true">
-                  {app.icon}
+                  <PixelIcon name={app.icon} />
                 </span>
                 <span>{app.title}</span>
               </button>
@@ -116,7 +117,9 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
               onClick={() => launch(app.id)}
               aria-label={app.title + (app.available ? "" : ", planned for " + app.release)}
             >
-              <span aria-hidden="true">{app.icon}</span>
+              <span className="dock-icon" aria-hidden="true">
+                <PixelIcon name={app.icon} />
+              </span>
               <small>{app.title}</small>
               {opened ? (
                 <span id={stateId} hidden>

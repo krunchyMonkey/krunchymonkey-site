@@ -1,9 +1,11 @@
+import { PixelIcon } from "../../../../components/PixelIcon";
+
 export function OpenBench() {
   return (
     <div className="open-bench">
       <header className="bench-heading">
         <span className="bench-emblem" aria-hidden="true">
-          ✦
+          <PixelIcon name="open-bench" />
         </span>
         <div>
           <h2>Open Bench</h2>
@@ -21,14 +23,14 @@ export function OpenBench() {
         <div className="bench-cards">
           <article className="bench-card">
             <span className="bench-card-art" aria-hidden="true">
-              ⌘
+              <PixelIcon name="schematics" />
             </span>
             <strong>KrunchOS</strong>
             <small>Architecture, interfaces, and small deliberate decisions.</small>
           </article>
           <article className="bench-card">
             <span className="bench-card-art alt" aria-hidden="true">
-              ▧
+              <PixelIcon name="workbench" />
             </span>
             <strong>Tracing Guatemala</strong>
             <small>A research workspace designed around researchers.</small>

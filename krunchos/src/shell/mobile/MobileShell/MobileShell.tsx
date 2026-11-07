@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { apps, getApp, type AppId } from "../../../apps";
+import { PixelIcon } from "../../../components/PixelIcon";
 import type { Appearance } from "../../model";
 import { ProjectExplorer } from "../../../features/workbench";
 import { OpenBench } from "../../../features/open-bench";
@@ -33,6 +34,8 @@ export function MobileShell({
     }
   }
 
+  const active = activeApp ? getApp(activeApp) : undefined;
+
   return (
     <div className="mobile-shell">
       <div className="mobile-statusbar">
@@ -46,9 +49,11 @@ export function MobileShell({
               ‹
             </button>
             <strong>
-              {getApp(activeApp)?.icon} {getApp(activeApp)?.title}
+              {active ? <PixelIcon name={active.icon} /> : null} {active?.title}
             </strong>
-            <span aria-hidden="true">▣</span>
+            <span aria-hidden="true">
+              <PixelIcon name="projects" />
+            </span>
           </header>
           <main className="mobile-app-content">
             {activeApp === "workbench" ? (
@@ -74,7 +79,7 @@ export function MobileShell({
             {apps.map((app) => (
               <button type="button" key={app.id} onClick={() => open(app.id)}>
                 <span className="mobile-app-icon" aria-hidden="true">
-                  {app.icon}
+                  <PixelIcon name={app.icon} />
                 </span>
                 <span>{app.title}</span>
               </button>
@@ -90,13 +95,13 @@ export function MobileShell({
       </div>
       <nav className="mobile-dock" aria-label="Mobile dock">
         <button type="button" onClick={onHome} aria-label="Home">
-          ⌂
+          <PixelIcon name="home" />
         </button>
         <button type="button" onClick={() => open("workbench")} aria-label="Open Workbench">
-          ▤
+          <PixelIcon name="workbench" />
         </button>
         <button type="button" onClick={() => open("open-bench")} aria-label="Open Bench">
-          ✦
+          <PixelIcon name="open-bench" />
         </button>
       </nav>
       <div className="mobile-home-indicator" aria-hidden="true" />

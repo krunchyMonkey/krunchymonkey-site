@@ -780,3 +780,16 @@ p {
     transition: none !important;
   }
 }
+
+.pixel-icon {
+  display: inline-block;
+  vertical-align: -0.125em;
+  flex: none;
+}
+.shortcut-icon .pixel-icon,
+.mobile-app-icon .pixel-icon {
+  vertical-align: top;
+}
+.dock-icon {
+  display: inline-flex;
+}

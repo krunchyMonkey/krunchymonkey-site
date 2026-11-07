@@ -1,3 +1,5 @@
+import type { PixelIconName } from "../components/PixelIcon";
+
 export type AppId =
   | "workbench"
   | "projects"
@@ -11,7 +13,7 @@ export type AppId =
 export interface RegisteredApp {
   readonly id: AppId;
   readonly title: string;
-  readonly icon: string;
+  readonly icon: PixelIconName;
   readonly description: string;
   readonly release: string;
   readonly available: boolean;
@@ -21,7 +23,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "workbench",
     title: "Workbench",
-    icon: "▤",
+    icon: "workbench",
     description: "Browse projects and discover how things are built.",
     release: "v0.1",
     available: true,
@@ -29,7 +31,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "projects",
     title: "Projects",
-    icon: "▣",
+    icon: "projects",
     description: "A directory of public experiments.",
     release: "v0.4",
     available: false,
@@ -37,7 +39,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "journal",
     title: "Journal",
-    icon: "▥",
+    icon: "journal",
     description: "Notes from the workbench.",
     release: "v0.4",
     available: false,
@@ -45,7 +47,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "schematics",
     title: "Schematics",
-    icon: "⌘",
+    icon: "schematics",
     description: "See how things are made.",
     release: "v0.4",
     available: false,
@@ -53,7 +55,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "browser",
     title: "Browser",
-    icon: "◎",
+    icon: "browser",
     description: "A curated browser for our real public demo applications.",
     release: "v0.5",
     available: false,
@@ -61,7 +63,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "terminal",
     title: "Terminal",
-    icon: ">_",
+    icon: "terminal",
     description: "A small command-line playground.",
     release: "v1.0",
     available: false,
@@ -69,7 +71,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "open-bench",
     title: "Open Bench",
-    icon: "✦",
+    icon: "open-bench",
     description: "A welcoming space for thoughtful engineering.",
     release: "v0.4 / v1.1",
     available: true,
@@ -77,7 +79,7 @@ export const apps: readonly RegisteredApp[] = [
   {
     id: "settings",
     title: "Settings",
-    icon: "⚙",
+    icon: "settings",
     description: "Personalize your workstation.",
     release: "v1.0",
     available: false,

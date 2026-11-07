@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PixelIcon } from "../../../../components/PixelIcon";
 import { publicProjects } from "../../model/projects";
 
 export function ProjectExplorer() {
@@ -30,14 +31,16 @@ export function ProjectExplorer() {
               onClick={() => setSelectedId(project.id)}
               aria-pressed={project.id === selectedId}
             >
-              <span>▣ {project.name}</span>
+              <span>
+                <PixelIcon name="projects" /> {project.name}
+              </span>
               <span>{project.kind}</span>
             </button>
           ))}
         </div>
         <section className="explorer-summary" aria-label="Selected project details">
           <div className="project-thumbnail" aria-hidden="true">
-            ▤
+            <PixelIcon name="workbench" />
           </div>
           <div>
             <strong>{selected.name}</strong>
