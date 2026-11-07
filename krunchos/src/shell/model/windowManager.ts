@@ -1,4 +1,4 @@
-import type { AppId } from "../../apps/registry";
+import type { AppId } from "../../apps";
 
 export interface DesktopWindow {
   readonly id: AppId;

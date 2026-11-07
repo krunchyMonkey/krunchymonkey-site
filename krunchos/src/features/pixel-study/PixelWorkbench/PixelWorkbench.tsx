@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { publicProjects } from "../../workbench/model/projects";
-import { BitButton } from "../../../vendor/8bitcn/Button";
+import { publicProjects } from "../../workbench";
 import {
+  BitButton,
   BitCard,
   BitCardContent,
   BitCardDescription,
   BitCardHeader,
   BitCardTitle,
-} from "../../../vendor/8bitcn/Card";
+} from "../../../vendor/8bitcn";
 
 export function PixelWorkbench() {
   const [selectedId, setSelectedId] = useState(publicProjects[0].id);

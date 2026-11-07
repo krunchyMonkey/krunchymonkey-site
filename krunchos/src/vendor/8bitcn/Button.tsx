@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from "class-variance-authority";
 import { Slot } from "radix-ui";
 import type { ButtonHTMLAttributes, Ref } from "react";
-import { ShadcnButton } from "../shadcn/Button";
+import { ShadcnButton } from "../shadcn";
 import { cn } from "../utils";
 import "./retro.css";
 

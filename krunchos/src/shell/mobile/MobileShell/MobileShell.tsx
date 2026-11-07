@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { apps, getApp, type AppId } from "../../../apps/registry";
-import type { Appearance } from "../../../app/App/App";
-import { ProjectExplorer } from "../../../features/workbench/components/ProjectExplorer";
-import { OpenBench } from "../../../features/open-bench/components/OpenBench";
-import { PixelWorkbench } from "../../../features/pixel-study/PixelWorkbench";
-import { PixelOpenBench } from "../../../features/pixel-study/PixelOpenBench";
+import { apps, getApp, type AppId } from "../../../apps";
+import type { Appearance } from "../../model";
+import { ProjectExplorer } from "../../../features/workbench";
+import { OpenBench } from "../../../features/open-bench";
+import { PixelOpenBench, PixelWorkbench } from "../../../features/pixel-study";
 import monkeyLogo from "../../../../../assets/krunchymonkey-logo.webp";
 
 interface MobileShellProps {

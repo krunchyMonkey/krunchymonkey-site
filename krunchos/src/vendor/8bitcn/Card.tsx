@@ -8,7 +8,7 @@ import {
   ShadcnCardFooter,
   ShadcnCardHeader,
   ShadcnCardTitle,
-} from "../shadcn/Card";
+} from "../shadcn";
 import "./retro.css";
 
 export const cardVariants = cva("", {

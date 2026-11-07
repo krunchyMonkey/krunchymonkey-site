@@ -1,6 +1,6 @@
 import { useRef, type PointerEvent, type ReactNode } from "react";
-import type { DesktopWindow } from "../../model/windowManager";
-import { getApp } from "../../../apps/registry";
+import type { DesktopWindow } from "../../model";
+import { getApp } from "../../../apps";
 
 interface WindowProps {
   readonly window: DesktopWindow;

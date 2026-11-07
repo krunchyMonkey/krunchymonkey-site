@@ -1,11 +1,11 @@
-import { BitButton } from "../../../vendor/8bitcn/Button";
 import {
+  BitButton,
   BitCard,
   BitCardContent,
   BitCardDescription,
   BitCardHeader,
   BitCardTitle,
-} from "../../../vendor/8bitcn/Card";
+} from "../../../vendor/8bitcn";
 
 export function PixelOpenBench() {
   return (
