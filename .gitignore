@@ -19,3 +19,8 @@ playwright-report/
 test-results/
 *.log
 visual-output/
+
+# Playwright output and non-Linux local screenshot baselines (Linux CI is the source of truth)
+krunchos/e2e/__screenshots__/win32/
+krunchos/e2e/__screenshots__/darwin/
+blob-report/
