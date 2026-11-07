@@ -4,6 +4,7 @@ import importX from "eslint-plugin-import-x";
 import tseslint from "typescript-eslint";
 
 const modules = [
+  "src/components/PixelIcon",
   "src/apps",
   "src/shell/model",
   "src/features/workbench",
@@ -15,6 +16,10 @@ const modules = [
 const unitDirs = ["src/app", "src/main.tsx", "src/shell/desktop", "src/shell/mobile", ...modules];
 
 const layerZones = [
+  {
+    target: "src/components",
+    from: ["src/app", "src/shell", "src/features", "src/apps", "src/main.tsx"],
+  },
   { target: "src/features", from: ["src/app", "src/shell", "src/main.tsx"] },
   { target: "src/shell", from: ["src/app", "src/main.tsx"] },
   { target: "src/app", from: ["src/main.tsx"] },
@@ -23,7 +28,7 @@ const layerZones = [
 ].map((zone) => ({
   ...zone,
   message:
-    "Layering is main -> app -> shell -> features -> apps/vendor; lower layers must not import higher ones.",
+    "Layering is main -> app -> shell -> features -> apps/vendor -> components; lower layers must not import higher ones.",
 }));
 
 const barrelZones = modules.map((dir) => ({
