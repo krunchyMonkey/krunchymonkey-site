@@ -1,0 +1,501 @@
+/* Scoped design spike: real OS shell with 8bitcn/ui controls in application windows. */
+.pixel-os {
+  --os-ink: #211b19;
+  --os-paper: #f3e1bd;
+  --os-cream: #ffedc6;
+  --os-gold: #f5be4b;
+  --os-edge: #1d1816;
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+}
+.pixel-os .desktop-shell {
+  background: #1e1b1d;
+}
+.pixel-os .system-bar {
+  background: #e7c994;
+  color: #241b14;
+  border-bottom: 5px solid #191513;
+  box-shadow: 0 2px #fff3d4 inset;
+}
+.pixel-os .system-brand {
+  font-weight: 900;
+  letter-spacing: -0.8px;
+}
+.pixel-os .system-menus button {
+  font-weight: 900;
+}
+.pixel-os .system-menus button:hover,
+.pixel-os .system-menus button:focus-visible {
+  background: #f6bc46;
+  color: #211914;
+}
+.pixel-os .desktop-workspace {
+  background: linear-gradient(
+    #8e5135 0%,
+    #da8d48 34%,
+    #e0a659 48%,
+    #73523e 49%,
+    #2d292a 70%,
+    #252326 100%
+  );
+}
+.pixel-os .desktop-workspace::after {
+  opacity: 0.16;
+  background-image: repeating-linear-gradient(0deg, transparent 0 3px, #191515 4px 5px);
+}
+.pixel-os .mountain-horizon {
+  display: none;
+}
+.pixel-os .desktop-art {
+  opacity: 1;
+}
+.pixel-os .workshop-label {
+  bottom: 9%;
+  right: 4%;
+  color: #ffdb98;
+  opacity: 0.75;
+  text-shadow: 3px 3px #231816;
+}
+.pixel-scenery {
+  display: none;
+}
+.pixel-os .pixel-scenery {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.pixel-os .scenery-sun {
+  position: absolute;
+  top: 9%;
+  right: 18%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ffe1a2;
+  box-shadow: 0 0 0 13px #f6ac5f77;
+}
+.pixel-os .scenery-mountain {
+  position: absolute;
+  bottom: 9%;
+  right: -7%;
+  width: 94%;
+  height: 83%;
+  background: linear-gradient(130deg, #94705e, #484044 50%, #332f34);
+  clip-path: polygon(0 100%, 13% 77%, 31% 83%, 53% 4%, 78% 73%, 100% 85%, 100% 100%);
+}
+.pixel-os .scenery-mountain-cap {
+  position: absolute;
+  right: 30%;
+  bottom: 72%;
+  height: 12%;
+  width: 20%;
+  background: #ffe0ae;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%, 73% 80%, 55% 92%, 42% 58%, 30% 90%);
+}
+.pixel-os .scenery-arch {
+  position: absolute;
+  right: 13%;
+  bottom: 12%;
+  height: 159px;
+  width: 170px;
+  background: #c38d56;
+  border: 6px solid #3f2c23;
+  box-shadow:
+    inset 0 13px #e9b576,
+    8px 8px #181719;
+}
+.pixel-os .scenery-arch::before {
+  content: "";
+  position: absolute;
+  left: 55px;
+  bottom: calc(100% + 6px);
+  height: 45px;
+  width: 44px;
+  background: #ce985a;
+  border: 6px solid #3f2c23;
+  border-bottom: 0;
+}
+.pixel-os .scenery-arch span {
+  position: absolute;
+  left: 34px;
+  bottom: -6px;
+  height: 102px;
+  width: 89px;
+  border: 7px solid #684a36;
+  border-bottom: 0;
+  border-radius: 46px 46px 0 0;
+  background: #2c2628;
+}
+.pixel-os .desktop-shortcuts {
+  top: 32px;
+  left: 18px;
+  gap: 22px;
+}
+.pixel-os .shortcut-icon {
+  border: 4px solid #171413;
+  border-radius: 0;
+  background: #ebcf96;
+  color: #261b14;
+  box-shadow:
+    inset 3px 3px #fff1cd,
+    5px 5px #0008;
+  font-size: 31px;
+  width: 60px;
+  height: 58px;
+}
+.pixel-os .desktop-shortcut span:last-child {
+  color: #fff0cf;
+  background: #272021c9;
+  padding: 3px 5px;
+}
+.pixel-os .os-window {
+  border: 5px solid #171414;
+  background: #f7e8c9;
+  box-shadow:
+    6px 6px #2e2221,
+    10px 12px #0009;
+}
+.pixel-os .window-titlebar {
+  background: #f7c352;
+  height: 43px;
+  min-height: 43px;
+  border-bottom: 4px solid #191513;
+  color: #201714;
+}
+.pixel-os .window-actions button {
+  background: #fff1ca;
+  color: #251a14;
+  border: 3px solid #1f1714;
+  border-radius: 0;
+}
+.pixel-os .window-contents {
+  background: #f7e8ca;
+}
+.pixel-os .desktop-dock {
+  background: #261f1d;
+  border-top: 4px solid #151212;
+}
+.pixel-os .dock-app {
+  border-radius: 0;
+}
+.pixel-os .dock-app.is-running {
+  background: #e7c994;
+  color: #231916;
+}
+.pixel-os .desktop-footer {
+  color: #f3dbaa;
+  letter-spacing: 1px;
+  background: #241c1b;
+}
+.pixel-os .pixel-workbench,
+.pixel-os .pixel-bench {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  font-size: 12px;
+  color: #211a16;
+  background: #f6e8cb;
+}
+.pixel-os .pixel-app-toolbar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 13px;
+  background: #e6d0a5;
+  border-bottom: 3px solid #211a16;
+  font-size: 11px;
+}
+.pixel-os .pixel-directory {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+.pixel-os .pixel-directory-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #ecd8b4;
+  border-right: 3px solid #241d19;
+  padding: 14px 8px;
+  font-size: 11px;
+}
+.pixel-os .pixel-folder-heading {
+  color: #805421;
+  font-weight: 900;
+}
+.pixel-os .pixel-directory-sidebar small {
+  color: #745437;
+  line-height: 1.5;
+}
+.pixel-os .pixel-directory-divider {
+  color: #9d8158;
+}
+.pixel-os .pixel-directory-main {
+  padding: 14px;
+  overflow: auto;
+  min-width: 0;
+}
+.pixel-os .pixel-directory-heading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px dashed #b19a74;
+  margin-bottom: 13px;
+}
+.pixel-os .pixel-directory-heading h2 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+.pixel-os .pixel-directory-heading span {
+  font-size: 10px;
+}
+.pixel-os .pixel-file-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+.pixel-os .pixel-file {
+  min-width: 0;
+  background: #fff1d4 !important;
+  border-color: #30211a;
+  box-shadow: 3px 3px #241b17;
+}
+.pixel-os .pixel-file.is-selected {
+  background: #ffe2a0 !important;
+}
+.pixel-os .pixel-file [data-slot="card"] {
+  gap: 4px;
+  padding: 9px 0;
+}
+.pixel-os .pixel-file [data-slot="card-header"] {
+  padding: 0 9px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+.pixel-os .pixel-file [data-slot="card-title"] {
+  font-family: "Courier New", monospace;
+  font-weight: 900;
+  font-size: 12px;
+}
+.pixel-os .pixel-file [data-slot="card-description"] {
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  color: #6d5136;
+}
+.pixel-os .pixel-file [data-slot="card-content"] {
+  padding: 7px 9px 1px;
+}
+.pixel-os .pixel-file-icon {
+  width: 38px;
+  height: 35px;
+  background: #3e302a;
+  color: #ffc953;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  border: 2px solid #1c1615;
+}
+.pixel-os .pixel-file-action,
+.pixel-os .pixel-bench-action {
+  background: #ffc352 !important;
+  color: #1c1512 !important;
+  min-height: 37px;
+  padding: 0 9px;
+  font-weight: 900;
+  font-size: 11px;
+  border-radius: 0;
+  cursor: pointer;
+}
+.pixel-os .pixel-file-action {
+  width: calc(100% - 8px);
+}
+.pixel-os .pixel-file-action:focus-visible,
+.pixel-os .pixel-bench-action:focus-visible {
+  outline: 3px solid #8a4e0f;
+  outline-offset: 5px;
+}
+.pixel-os .pixel-inspector {
+  margin: 15px 0;
+  border: 3px solid #211b17;
+  background: #fff2d8;
+}
+.pixel-os .pixel-inspector-title {
+  display: block;
+  padding: 6px 9px;
+  background: #342823;
+  color: #fce2a8;
+}
+.pixel-os .pixel-inspector > div {
+  padding: 10px;
+}
+.pixel-os .pixel-inspector strong {
+  font-size: 13px;
+}
+.pixel-os .pixel-inspector p {
+  margin: 6px 0 10px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.pixel-os .pixel-file-status {
+  background: #ffd06b;
+  padding: 4px;
+  font-size: 10px;
+}
+.pixel-os .pixel-app-status {
+  padding: 6px 9px;
+  border-top: 3px solid #221916;
+  font-size: 10px;
+  background: #e6d0a5;
+}
+.pixel-os .pixel-bench-content {
+  padding: 14px;
+  overflow: auto;
+}
+.pixel-os .pixel-bench-intro {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.pixel-os .pixel-bench-emblem {
+  display: grid;
+  place-items: center;
+  background: #3a2b25;
+  border: 3px solid #211715;
+  color: #ffbf49;
+  font-size: 31px;
+  width: 57px;
+  height: 57px;
+}
+.pixel-os .pixel-bench-intro h2 {
+  margin: 0;
+  font-size: 17px;
+}
+.pixel-os .pixel-bench-intro p,
+.pixel-os .pixel-bench-card p {
+  margin: 5px 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.pixel-os .pixel-bench-card {
+  background: #fff1d3 !important;
+  border-color: #2b221d;
+}
+.pixel-os .pixel-bench-card [data-slot="card"] {
+  gap: 8px;
+  padding: 12px 0;
+}
+.pixel-os .pixel-bench-card [data-slot="card-title"] {
+  font-size: 13px;
+  font-weight: 900;
+}
+.pixel-os .pixel-bench-card [data-slot="card-description"] {
+  font-size: 11px;
+}
+.pixel-os .pixel-bench-note {
+  font-size: 10px;
+  color: #6b4e31;
+  margin: 14px 0;
+}
+.pixel-os .mobile-shell {
+  background: #322622;
+  color: #261b17;
+}
+.pixel-os .mobile-statusbar {
+  background: #f2ca82;
+  color: #211916;
+}
+.pixel-os .mobile-titlebar {
+  background: #f3c052;
+  color: #211916;
+  border-bottom: 4px solid #1b1613;
+}
+.pixel-os .mobile-app-content {
+  background: #f7e8ca;
+}
+.pixel-os .mobile-home {
+  background: linear-gradient(#9b5c37, #e5a858 40%, #463631 74%, #292326);
+  color: #fff0cf;
+}
+.pixel-os .mobile-icons {
+  background: #e8d2a7;
+  border: 4px solid #1d1715;
+  box-shadow: 6px 6px #0007;
+}
+.pixel-os .mobile-icons button {
+  color: #271e18;
+}
+.pixel-os .mobile-app-icon {
+  background: #f6ba49;
+  border: 3px solid #211815;
+  color: #241b17;
+  border-radius: 0;
+}
+.pixel-os .mobile-dock {
+  background: #2a211e;
+  border-top: 4px solid #141110;
+}
+.pixel-os .mobile-dock button {
+  border-radius: 0;
+  background: #e7c990;
+  color: #221a16;
+  border: 3px solid #15120f;
+}
+.pixel-os .mobile-home-indicator {
+  background: #2a211e;
+}
+@media (max-width: 820px) {
+  .pixel-os .pixel-directory {
+    display: flex;
+    flex-direction: column;
+  }
+  .pixel-os .pixel-directory-sidebar {
+    display: none;
+  }
+  .pixel-os .pixel-file-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+  .pixel-os .pixel-directory-main {
+    padding: 13px;
+  }
+  .pixel-os .pixel-file [data-slot="card-title"] {
+    font-size: 12px;
+  }
+  .pixel-os .pixel-app-toolbar {
+    font-size: 10px;
+  }
+  .pixel-os .pixel-workbench {
+    height: auto;
+    min-height: 100%;
+  }
+}
+@media (max-width: 430px) {
+  .pixel-os .pixel-file [data-slot="card-title"] {
+    font-size: 11px;
+  }
+  .pixel-os .pixel-file [data-slot="card-header"] {
+    padding: 0 7px;
+  }
+  .pixel-os .pixel-file [data-slot="card-content"] {
+    padding: 7px;
+  }
+  .pixel-os .pixel-file-action {
+    font-size: 10px;
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pixel-os *,
+  .pixel-os *::before,
+  .pixel-os *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

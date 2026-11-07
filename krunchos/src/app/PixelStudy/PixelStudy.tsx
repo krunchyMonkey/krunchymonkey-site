@@ -1,4 +1,4 @@
-import { App } from "../../app";
+import { App } from "../App";
 import "./PixelStudy.css";
 
 export function PixelStudy() {

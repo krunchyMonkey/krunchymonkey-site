@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { publicProjects } from "../../workbench/model/projects";
-import { BitButton } from "../../../vendor/8bitcn/Button";
+import { publicProjects } from "../../workbench";
 import {
-  BitCard, BitCardContent, BitCardDescription, BitCardHeader, BitCardTitle,
-} from "../../../vendor/8bitcn/Card";
+  BitButton,
+  BitCard,
+  BitCardContent,
+  BitCardDescription,
+  BitCardHeader,
+  BitCardTitle,
+} from "../../../vendor/8bitcn";
 
 export function PixelWorkbench() {
   const [selectedId, setSelectedId] = useState(publicProjects[0].id);
@@ -38,7 +42,11 @@ export function PixelWorkbench() {
               >
                 <BitCardHeader>
                   <span className="pixel-file-icon" aria-hidden="true">
-                    {project.id === "tracing-guatemala" ? "▥" : project.kind === "Experiment" ? "✧" : "▤"}
+                    {project.id === "tracing-guatemala"
+                      ? "▥"
+                      : project.kind === "Experiment"
+                        ? "✧"
+                        : "▤"}
                   </span>
                   <BitCardTitle>{project.name}</BitCardTitle>
                   <BitCardDescription>{project.kind}</BitCardDescription>
@@ -59,7 +67,11 @@ export function PixelWorkbench() {
               </BitCard>
             ))}
           </div>
-          <section className="pixel-inspector" aria-label="Selected project details" aria-live="polite">
+          <section
+            className="pixel-inspector"
+            aria-label="Selected project details"
+            aria-live="polite"
+          >
             <span className="pixel-inspector-title">▥ FILE DETAILS</span>
             <div>
               <strong>{selected.name}</strong>

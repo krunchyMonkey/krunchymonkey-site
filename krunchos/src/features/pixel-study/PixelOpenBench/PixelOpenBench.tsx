@@ -1,7 +1,11 @@
-import { BitButton } from "../../../vendor/8bitcn/Button";
 import {
-  BitCard, BitCardContent, BitCardDescription, BitCardHeader, BitCardTitle,
-} from "../../../vendor/8bitcn/Card";
+  BitButton,
+  BitCard,
+  BitCardContent,
+  BitCardDescription,
+  BitCardHeader,
+  BitCardTitle,
+} from "../../../vendor/8bitcn";
 
 export function PixelOpenBench() {
   return (
@@ -12,7 +16,9 @@ export function PixelOpenBench() {
       </div>
       <div className="pixel-bench-content">
         <div className="pixel-bench-intro">
-          <span className="pixel-bench-emblem" aria-hidden="true">✦</span>
+          <span className="pixel-bench-emblem" aria-hidden="true">
+            ✦
+          </span>
           <div>
             <h2>Pull up a chair.</h2>
             <p>A workshop for curious builders and thoughtful code.</p>

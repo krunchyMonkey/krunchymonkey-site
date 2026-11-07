@@ -1,6 +1,6 @@
 import { useRef, type PointerEvent, type ReactNode } from "react";
-import type { DesktopWindow } from "../../model/windowManager";
-import { getApp } from "../../../apps/registry";
+import type { DesktopWindow } from "../../model";
+import { getApp } from "../../../apps";
 
 interface WindowProps {
   readonly window: DesktopWindow;
@@ -18,7 +18,14 @@ interface DragOrigin {
   readonly y: number;
 }
 
-export function Window({ window: frame, children, onMove, onFocus, onClose, onMinimize }: WindowProps) {
+export function Window({
+  window: frame,
+  children,
+  onMove,
+  onFocus,
+  onClose,
+  onMinimize,
+}: WindowProps) {
   const dragOrigin = useRef<DragOrigin | null>(null);
   const app = getApp(frame.id);
 
@@ -80,8 +87,12 @@ export function Window({ window: frame, children, onMove, onFocus, onClose, onMi
           <strong>{app?.title ?? "Unknown"}</strong>
         </div>
         <div className="window-actions">
-          <button type="button" onClick={onMinimize} aria-label={`Minimize ${app?.title}`}>_</button>
-          <button type="button" onClick={onClose} aria-label={`Close ${app?.title}`}>×</button>
+          <button type="button" onClick={onMinimize} aria-label={`Minimize ${app?.title}`}>
+            _
+          </button>
+          <button type="button" onClick={onClose} aria-label={`Close ${app?.title}`}>
+            ×
+          </button>
         </div>
       </header>
       <div className="window-contents">{children}</div>

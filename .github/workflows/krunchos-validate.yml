@@ -41,6 +41,8 @@ jobs:
         run: npm run typecheck
       - name: Lint preview source and tests
         run: npm run lint
+      - name: Check formatting
+        run: npm run format:check
       - name: Run colocated unit and component tests
         run: npm test
       - name: Build local preview artifact

@@ -15,16 +15,22 @@ npm run dev
 
 Open the URL printed by Vite (usually **http://localhost:5173/**). The server binds to localhost only.
 
-Run checks:
+Reproduce CI locally, in order:
 
 ```bash
-npm run typecheck
-npm run lint
-npm test
-npm run build
+npm ci
+npm run check                            # typecheck, lint, format:check, unit tests, build
 npx playwright install chromium webkit   # once
 npm run test:e2e                         # Playwright E2E + visual regression on 127.0.0.1:4317
 ```
+
+`npm run format` applies Prettier. Screenshot baselines are Linux-only, so visual results on other platforms are not authoritative.
+
+## Architecture boundaries
+
+Layers, top to bottom: `main.tsx` -> `src/app` -> `src/shell` -> `src/features` -> `src/apps` (registry) and `src/vendor`. A lower layer never imports a higher one.
+
+Modules (`src/apps`, `src/shell/model`, each `src/features/*`, each `src/vendor/*`) expose a public API through their `index.ts`. Import them from outside only via that barrel, never via `components/...` or `model/...` paths. This also forbids deep imports between features. ESLint enforces both rules (`import-x/no-restricted-paths`) together with `import-x/no-cycle`.
 
 See [docs/E2E_TESTING.md](docs/E2E_TESTING.md) for the browser matrix, screenshot baseline process and triage.
 

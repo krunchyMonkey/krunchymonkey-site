@@ -37,7 +37,9 @@ describe("pixel OS design study", () => {
     fireEvent.click(within(dock).getByRole("button", { name: "Workbench" }));
     const restored = within(desktop).getByRole("region", { name: "Workbench window" });
     expect(
-      within(restored).getByRole("button", { name: "Inspect Data Sketches" }).getAttribute("aria-pressed"),
+      within(restored)
+        .getByRole("button", { name: "Inspect Data Sketches" })
+        .getAttribute("aria-pressed"),
     ).toBe("true");
   });
 

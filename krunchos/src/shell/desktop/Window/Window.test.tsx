@@ -11,7 +11,13 @@ describe("Window", () => {
     render(
       <Window
         window={{
-          id: "workbench", x: 10, y: 20, width: 500, height: 400, zIndex: 1, minimized: false,
+          id: "workbench",
+          x: 10,
+          y: 20,
+          width: 500,
+          height: 400,
+          zIndex: 1,
+          minimized: false,
         }}
         onMove={vi.fn()}
         onFocus={vi.fn()}

@@ -1,4 +1,4 @@
-import type { AppId } from "../../apps/registry";
+import type { AppId } from "../../apps";
 
 export interface DesktopWindow {
   readonly id: AppId;
@@ -23,7 +23,9 @@ export type WindowAction =
   | { readonly type: "move"; readonly id: AppId; readonly x: number; readonly y: number };
 
 export const initialWindowState: WindowState = {
-  windows: [{ id: "workbench", x: 175, y: 108, width: 580, height: 430, zIndex: 1, minimized: false }],
+  windows: [
+    { id: "workbench", x: 175, y: 108, width: 580, height: 430, zIndex: 1, minimized: false },
+  ],
   nextZIndex: 2,
 };
 
@@ -77,9 +79,7 @@ export function windowReducer(state: WindowState, action: WindowAction): WindowS
 
   return {
     windows: state.windows.map((item) =>
-      item.id === action.id
-        ? { ...item, minimized: false, zIndex: state.nextZIndex }
-        : item,
+      item.id === action.id ? { ...item, minimized: false, zIndex: state.nextZIndex } : item,
     ),
     nextZIndex: state.nextZIndex + 1,
   };

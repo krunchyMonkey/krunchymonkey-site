@@ -1,9 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";
-import { PixelStudy } from "./features/pixel-study/PixelStudy";
+import { PixelStudy } from "./app/PixelStudy";
 import "./styles/tokens.css";
-import "./features/pixel-study/pixel-theme.css";
+import "./app/PixelStudy/pixel-theme.css";
 
 const root = document.getElementById("root");
 const pixelStudyEnabled = new URLSearchParams(window.location.search).get("preview") === "8bitcn";
@@ -13,7 +13,5 @@ if (!root) {
 }
 
 createRoot(root).render(
-  <React.StrictMode>
-    {pixelStudyEnabled ? <PixelStudy /> : <App />}
-  </React.StrictMode>,
+  <React.StrictMode>{pixelStudyEnabled ? <PixelStudy /> : <App />}</React.StrictMode>,
 );
