@@ -9,7 +9,7 @@ Requirements: Node.js 22+ and npm.
 ```bash
 git checkout feat/krunchos-v01-foundations
 cd krunchos
-npm install
+npm ci
 npm run dev
 ```
 
@@ -22,7 +22,11 @@ npm run typecheck
 npm run lint
 npm test
 npm run build
+npx playwright install chromium webkit   # once
+npm run test:e2e                         # Playwright E2E + visual regression on 127.0.0.1:4317
 ```
+
+See [docs/E2E_TESTING.md](docs/E2E_TESTING.md) for the browser matrix, screenshot baseline process and triage.
 
 Nothing in these commands deploys the preview. A generated `dist/` in this folder is a local build artifact only.
 
