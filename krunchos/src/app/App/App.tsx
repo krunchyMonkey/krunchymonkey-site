@@ -2,7 +2,11 @@ import { useReducer, useState } from "react";
 import { getApp, type AppId } from "../../apps/registry";
 import { DesktopShell } from "../../shell/desktop/DesktopShell";
 import { MobileShell } from "../../shell/mobile/MobileShell";
-import { initialWindowState, windowReducer, type WindowState } from "../../shell/model/windowManager";
+import {
+  initialWindowState,
+  windowReducer,
+  type WindowState,
+} from "../../shell/model/windowManager";
 
 export type Appearance = "classic" | "pixel";
 

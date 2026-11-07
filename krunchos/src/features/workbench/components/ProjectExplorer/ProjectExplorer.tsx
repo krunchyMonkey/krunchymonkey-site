@@ -8,7 +8,9 @@ export function ProjectExplorer() {
   return (
     <div className="explorer">
       <div className="explorer-sidebar">
-        <strong className="explorer-category is-selected">▸ All Projects ({publicProjects.length})</strong>
+        <strong className="explorer-category is-selected">
+          ▸ All Projects ({publicProjects.length})
+        </strong>
         <span className="explorer-category">▸ Featured</span>
         <span className="explorer-category">▸ Experiments</span>
         <span className="explorer-category">▸ Archive</span>
@@ -34,7 +36,9 @@ export function ProjectExplorer() {
           ))}
         </div>
         <section className="explorer-summary" aria-label="Selected project details">
-          <div className="project-thumbnail" aria-hidden="true">▤</div>
+          <div className="project-thumbnail" aria-hidden="true">
+            ▤
+          </div>
           <div>
             <strong>{selected.name}</strong>
             <p>{selected.summary}</p>

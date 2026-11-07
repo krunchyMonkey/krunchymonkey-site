@@ -16,13 +16,16 @@ export const cardVariants = cva("", {
   defaultVariants: { font: "retro" },
 });
 
-export interface BitCardProps
-  extends ComponentProps<"div">,
-    VariantProps<typeof cardVariants> {}
+export interface BitCardProps extends ComponentProps<"div">, VariantProps<typeof cardVariants> {}
 
 export function BitCard({ className, font, ...props }: BitCardProps) {
   return (
-    <div className={cn("relative bg-card text-card-foreground border-y-6 border-foreground p-0!", className)}>
+    <div
+      className={cn(
+        "relative bg-card text-card-foreground border-y-6 border-foreground p-0!",
+        className,
+      )}
+    >
       <ShadcnCard
         {...props}
         className={cn(
@@ -31,7 +34,10 @@ export function BitCard({ className, font, ...props }: BitCardProps) {
           className,
         )}
       />
-      <div className="absolute inset-0 border-x-6 -mx-1.5 border-inherit pointer-events-none" aria-hidden="true" />
+      <div
+        className="absolute inset-0 border-x-6 -mx-1.5 border-inherit pointer-events-none"
+        aria-hidden="true"
+      />
     </div>
   );
 }

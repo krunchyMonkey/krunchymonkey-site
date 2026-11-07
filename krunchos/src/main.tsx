@@ -13,7 +13,5 @@ if (!root) {
 }
 
 createRoot(root).render(
-  <React.StrictMode>
-    {pixelStudyEnabled ? <PixelStudy /> : <App />}
-  </React.StrictMode>,
+  <React.StrictMode>{pixelStudyEnabled ? <PixelStudy /> : <App />}</React.StrictMode>,
 );

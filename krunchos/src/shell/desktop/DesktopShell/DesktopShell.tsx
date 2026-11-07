@@ -28,7 +28,12 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
   function launch(id: AppId) {
     const app = getApp(id);
     if (!app?.available) {
-      setNotice((app?.title ?? "Application") + " is planned for " + (app?.release ?? "a future release") + ".");
+      setNotice(
+        (app?.title ?? "Application") +
+          " is planned for " +
+          (app?.release ?? "a future release") +
+          ".",
+      );
       return;
     }
     setNotice("");
@@ -43,10 +48,16 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
           <strong>KrunchOS</strong>
         </div>
         <nav className="system-menus" aria-label="Workstation menus">
-          <button type="button" onClick={() => launch("workbench")}>Workbench</button>
-          <button type="button" onClick={() => launch("open-bench")}>Open Bench</button>
+          <button type="button" onClick={() => launch("workbench")}>
+            Workbench
+          </button>
+          <button type="button" onClick={() => launch("open-bench")}>
+            Open Bench
+          </button>
         </nav>
-        <span className="system-status">{appearance === "pixel" ? "PIXEL EDITION · LOCAL v0.1" : "LOCAL PREVIEW · v0.1"}</span>
+        <span className="system-status">
+          {appearance === "pixel" ? "PIXEL EDITION · LOCAL v0.1" : "LOCAL PREVIEW · v0.1"}
+        </span>
       </header>
       <main className="desktop-workspace" aria-label="KrunchOS desktop">
         <div className="desktop-art" aria-hidden="true">
@@ -54,18 +65,29 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
             <div className="scenery-sun" />
             <div className="scenery-mountain" />
             <div className="scenery-mountain-cap" />
-            <div className="scenery-arch"><span /></div>
+            <div className="scenery-arch">
+              <span />
+            </div>
           </div>
           <div className="mountain-horizon" />
           <div className="workshop-label">ORDER BENEATH THE CHAOS</div>
         </div>
         <nav className="desktop-shortcuts" aria-label="Desktop shortcuts">
-          {apps.filter((app) => ["workbench", "projects", "journal", "open-bench"].includes(app.id)).map((app) => (
-            <button key={app.id} className="desktop-shortcut" type="button" onClick={() => launch(app.id)}>
-              <span className="shortcut-icon" aria-hidden="true">{app.icon}</span>
-              <span>{app.title}</span>
-            </button>
-          ))}
+          {apps
+            .filter((app) => ["workbench", "projects", "journal", "open-bench"].includes(app.id))
+            .map((app) => (
+              <button
+                key={app.id}
+                className="desktop-shortcut"
+                type="button"
+                onClick={() => launch(app.id)}
+              >
+                <span className="shortcut-icon" aria-hidden="true">
+                  {app.icon}
+                </span>
+                <span>{app.title}</span>
+              </button>
+            ))}
         </nav>
         {windows.map((frame) => (
           <Window
@@ -79,7 +101,9 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
             <Content id={frame.id} appearance={appearance} />
           </Window>
         ))}
-        <div className="desktop-toast" role="status">{notice}</div>
+        <div className="desktop-toast" role="status">
+          {notice}
+        </div>
       </main>
       <nav className="desktop-dock" aria-label="Application dock">
         {apps.map((app) => {
@@ -98,7 +122,11 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
           );
         })}
       </nav>
-      <footer className="desktop-footer">{appearance === "pixel" ? "KRUNCHOS / WORKSHOP · 8BITCN STUDY · NOT DEPLOYED" : "KRUNCHOS LAB · NOT DEPLOYED · EXPERIMENTAL PREVIEW"}</footer>
+      <footer className="desktop-footer">
+        {appearance === "pixel"
+          ? "KRUNCHOS / WORKSHOP · 8BITCN STUDY · NOT DEPLOYED"
+          : "KRUNCHOS LAB · NOT DEPLOYED · EXPERIMENTAL PREVIEW"}
+      </footer>
     </div>
   );
 }

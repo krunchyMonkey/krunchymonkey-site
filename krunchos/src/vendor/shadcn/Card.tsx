@@ -2,7 +2,13 @@ import type { ComponentProps } from "react";
 import { cn } from "../utils";
 
 export function ShadcnCard({ className, ...props }: ComponentProps<"div">) {
-  return <div data-slot="card" className={cn("flex flex-col gap-4 rounded-xl border py-4", className)} {...props} />;
+  return (
+    <div
+      data-slot="card"
+      className={cn("flex flex-col gap-4 rounded-xl border py-4", className)}
+      {...props}
+    />
+  );
 }
 
 export function ShadcnCardHeader({ className, ...props }: ComponentProps<"div">) {
@@ -22,5 +28,7 @@ export function ShadcnCardContent({ className, ...props }: ComponentProps<"div">
 }
 
 export function ShadcnCardFooter({ className, ...props }: ComponentProps<"div">) {
-  return <div data-slot="card-footer" className={cn("flex items-center px-4", className)} {...props} />;
+  return (
+    <div data-slot="card-footer" className={cn("flex items-center px-4", className)} {...props} />
+  );
 }

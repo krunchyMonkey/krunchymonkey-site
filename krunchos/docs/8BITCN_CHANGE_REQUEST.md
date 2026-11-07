@@ -7,7 +7,7 @@
 
 ## Revised product decision
 
-The first 8bitcn/ui prototype rendered as a conventional marketing SPA. Owner feedback: it looked too much like a webpage rather than an operating system. **Correct approach: retain the existing functional KrunchOS desktop/mobile OS shell and window manager, and use pixel-styled 8bitcn/ui components *inside* apps.**
+The first 8bitcn/ui prototype rendered as a conventional marketing SPA. Owner feedback: it looked too much like a webpage rather than an operating system. **Correct approach: retain the existing functional KrunchOS desktop/mobile OS shell and window manager, and use pixel-styled 8bitcn/ui components _inside_ apps.**
 
 ## Comparison URLs
 

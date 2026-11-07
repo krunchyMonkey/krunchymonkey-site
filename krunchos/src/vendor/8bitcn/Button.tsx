@@ -35,7 +35,11 @@ interface DecorationsProps {
 
 function ButtonDecorations({ size, variant }: DecorationsProps) {
   return (
-    <span aria-hidden="true" className="pointer-events-none contents" data-slot="button-decorations">
+    <span
+      aria-hidden="true"
+      className="pointer-events-none contents"
+      data-slot="button-decorations"
+    >
       {variant !== "ghost" && variant !== "link" && size !== "icon" && (
         <>
           <span className="absolute -top-1.5 left-1.5 h-1.5 w-1/2 bg-foreground dark:bg-ring" />
