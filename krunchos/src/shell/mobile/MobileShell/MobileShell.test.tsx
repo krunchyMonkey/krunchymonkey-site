@@ -9,14 +9,21 @@ describe("MobileShell", () => {
     const onLaunch = vi.fn();
     const onHome = vi.fn();
     const { rerender } = render(
-      <MobileShell activeApp={null} onLaunch={onLaunch} onHome={onHome} />,
+      <MobileShell activeApp={null} onLaunch={onLaunch} onHome={onHome} renderApp={() => null} />,
     );
 
     const launcher = screen.getByRole("navigation", { name: "Mobile applications" });
     fireEvent.click(within(launcher).getByRole("button", { name: "Workbench" }));
     expect(onLaunch).toHaveBeenCalledWith("workbench");
 
-    rerender(<MobileShell activeApp="workbench" onLaunch={onLaunch} onHome={onHome} />);
+    rerender(
+      <MobileShell
+        activeApp="workbench"
+        onLaunch={onLaunch}
+        onHome={onHome}
+        renderApp={() => null}
+      />,
+    );
     fireEvent.click(screen.getByRole("button", { name: "Back to home" }));
     expect(onHome).toHaveBeenCalledOnce();
   });
@@ -24,7 +31,7 @@ describe("MobileShell", () => {
   it("does not launch an unfinished application", () => {
     const onLaunch = vi.fn();
     const { container } = render(
-      <MobileShell activeApp={null} onLaunch={onLaunch} onHome={vi.fn()} />,
+      <MobileShell activeApp={null} onLaunch={onLaunch} onHome={vi.fn()} renderApp={() => null} />,
     );
 
     const launcher = screen.getByRole("navigation", { name: "Mobile applications" });
