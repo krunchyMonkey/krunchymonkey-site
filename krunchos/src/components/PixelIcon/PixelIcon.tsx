@@ -18,7 +18,6 @@ interface PixelIconProps {
   readonly className?: string;
 }
 
-/** Decorative 16px pixel icon; inherits colour and scales with font-size. */
 export function PixelIcon({ name, className }: PixelIconProps) {
   return (
     <svg

@@ -28,7 +28,7 @@ npm run test:e2e                         # Playwright E2E + visual regression on
 
 ## Architecture boundaries
 
-Layers, top to bottom: `main.tsx` -> `src/app` -> `src/shell` -> `src/features` -> `src/apps` (registry) and `src/vendor`. A lower layer never imports a higher one.
+Layers, top to bottom: `main.tsx` -> `src/app` -> `src/shell` -> `src/features` -> `src/apps` (registry) and `src/vendor` -> `src/components` (shared UI such as `PixelIcon`). A lower layer never imports a higher one; `src/apps` may import types from `src/components`.
 
 Modules (`src/apps`, `src/shell/model`, each `src/features/*`, each `src/vendor/*`) expose a public API through their `index.ts`. Import them from outside only via that barrel, never via `components/...` or `model/...` paths. This also forbids deep imports between features. ESLint enforces both rules (`import-x/no-restricted-paths`) together with `import-x/no-cycle`.
 
