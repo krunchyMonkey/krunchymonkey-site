@@ -189,13 +189,84 @@ test.describe("app navigation", () => {
   });
 
   test("browser back returns from an app to the launcher", async ({ page }) => {
-    test.fail(true, "Known gap: the mobile shell does not use browser history yet (KMOS-011 #24).");
     const mobile = mobileShell(page);
     await mobile.launcher.getByRole("button", { name: "Workbench" }).tap();
     await expect(mobile.back).toBeVisible();
 
     await page.goBack();
 
-    await expect(mobile.launcher).toBeVisible({ timeout: 2_000 });
+    await expect(mobile.launcher).toBeVisible();
+    await expect(mobile.back).toBeHidden();
+  });
+
+  test("browser forward after back restores the app", async ({ page }) => {
+    const mobile = mobileShell(page);
+    await mobile.launcher.getByRole("button", { name: "Workbench" }).tap();
+    await page.goBack();
+    await expect(mobile.launcher).toBeVisible();
+
+    await page.goForward();
+
+    await expect(mobile.back).toBeVisible();
+    await expect(page.getByRole("region", { name: "Project files" })).toBeVisible();
+  });
+
+  test("moves focus to the app title on open and to the launcher button on back", async ({
+    page,
+  }) => {
+    const mobile = mobileShell(page);
+    await mobile.launcher.getByRole("button", { name: "Workbench" }).tap();
+    await expect(page.locator(".mobile-titlebar strong")).toBeFocused();
+
+    await page.goBack();
+    await expect(mobile.launcher.getByRole("button", { name: "Workbench" })).toBeFocused();
+  });
+});
+
+test.describe("deep links", () => {
+  async function coldBoot(page: Page, path: string) {
+    await page.goto("about:blank");
+    await bootKrunchOS(page, path);
+  }
+
+  test("a cold deep link opens the app and survives a reload", async ({ page }) => {
+    const mobile = mobileShell(page);
+    await coldBoot(page, PIXEL_OS_PATH + "#/workbench");
+    await expect(page.getByRole("region", { name: "Project files" })).toBeVisible();
+    await expect(mobile.launcher).toBeHidden();
+
+    await page.reload();
+    await expect(page.getByRole("region", { name: "Project files" })).toBeVisible();
+    await expect(page.locator(".mobile-titlebar strong")).toContainText("Workbench");
+  });
+
+  test("an unknown route shows the launcher with a notice and drops the hash", async ({ page }) => {
+    const mobile = mobileShell(page);
+    await coldBoot(page, PIXEL_OS_PATH + "#/nope");
+    await expect(mobile.launcher).toBeVisible();
+    await expect(mobile.status).toHaveText("That app could not be found.");
+    expect(new URL(page.url()).hash).toBe("");
+    expect(new URL(page.url()).search).toBe("?preview=8bitcn");
+  });
+
+  test("a planned app route shows the launcher with its arrival notice", async ({ page }) => {
+    const mobile = mobileShell(page);
+    await coldBoot(page, PIXEL_OS_PATH + "#/terminal");
+    await expect(mobile.launcher).toBeVisible();
+    await expect(mobile.status).toHaveText("Terminal arrives in v1.0.");
+    expect(new URL(page.url()).hash).toBe("");
+  });
+
+  test("Back to home after a cold deep link never leaves KrunchOS", async ({ page }) => {
+    const mobile = mobileShell(page);
+    await coldBoot(page, PIXEL_OS_PATH + "#/workbench");
+    const before = new URL(page.url());
+
+    await mobile.back.tap();
+
+    await expect(mobile.launcher).toBeVisible();
+    const after = new URL(page.url());
+    expect(after.origin + after.pathname).toBe(before.origin + before.pathname);
+    expect(after.hash).toBe("");
   });
 });

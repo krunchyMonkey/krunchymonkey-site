@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { apps, getApp, withCapability, type AppId } from "../../../apps";
 import { PixelIcon } from "../../../components/PixelIcon";
 import type { AppRenderer, Appearance } from "../../model";
@@ -8,6 +8,8 @@ interface MobileShellProps {
   readonly appearance?: Appearance;
   readonly activeApp: AppId | null;
   readonly onLaunch: (id: AppId) => void;
+  readonly notice: string;
+  readonly onNotice: (notice: string) => void;
   readonly onHome: () => void;
   readonly renderApp: AppRenderer;
 }
@@ -16,18 +18,28 @@ export function MobileShell({
   appearance = "classic",
   activeApp,
   onLaunch,
+  notice,
+  onNotice,
   onHome,
   renderApp,
 }: MobileShellProps) {
-  const [notice, setNotice] = useState("");
+  const titleRef = useRef<HTMLElement>(null);
+  const iconRefs = useRef(new Map<AppId, HTMLButtonElement>());
+  const previousApp = useRef<AppId | null>(null);
+
+  useEffect(() => {
+    if (activeApp) titleRef.current?.focus();
+    else if (previousApp.current) iconRefs.current.get(previousApp.current)?.focus();
+    previousApp.current = activeApp;
+  }, [activeApp]);
 
   function open(id: AppId) {
     const app = getApp(id);
     if (app?.available) {
-      setNotice("");
+      onNotice("");
       onLaunch(id);
     } else {
-      setNotice(
+      onNotice(
         (app?.title ?? "This app") + " arrives in " + (app?.release ?? "a future release") + ".",
       );
     }
@@ -47,7 +59,7 @@ export function MobileShell({
             <button type="button" onClick={onHome} aria-label="Back to home">
               ‹
             </button>
-            <strong>
+            <strong ref={titleRef} tabIndex={-1}>
               {active ? <PixelIcon name={active.icon} /> : null} {active?.title}
             </strong>
             <span aria-hidden="true">
@@ -64,7 +76,15 @@ export function MobileShell({
           <div className="mobile-rule" />
           <nav className="mobile-icons" aria-label="Mobile applications">
             {apps.map((app) => (
-              <button type="button" key={app.id} onClick={() => open(app.id)}>
+              <button
+                type="button"
+                key={app.id}
+                ref={(node) => {
+                  if (node) iconRefs.current.set(app.id, node);
+                  else iconRefs.current.delete(app.id);
+                }}
+                onClick={() => open(app.id)}
+              >
                 <span className="mobile-app-icon" aria-hidden="true">
                   <PixelIcon name={app.icon} />
                 </span>

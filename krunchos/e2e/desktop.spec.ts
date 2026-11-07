@@ -1,5 +1,6 @@
 import {
   FALLBACK_FONT_GLYPHS,
+  PIXEL_OS_PATH,
   bootKrunchOS,
   desktopShell,
   dragWindow,
@@ -258,5 +259,18 @@ test.describe("planned applications", () => {
 
     await os.shortcuts.getByRole("button", { name: "Workbench" }).click();
     await expect(os.status).toBeHidden();
+  });
+});
+
+test.describe("deep links", () => {
+  test("a cold deep link brings Open Bench to the front", async ({ page }) => {
+    await page.goto("about:blank");
+    await bootKrunchOS(page, PIXEL_OS_PATH + "#/open-bench");
+    const os = desktopShell(page);
+    const zIndexOf = (title: string) =>
+      os.window(title).evaluate((element) => Number(getComputedStyle(element).zIndex));
+
+    await expect(os.window("Open Bench")).toBeVisible();
+    expect(await zIndexOf("Open Bench")).toBeGreaterThan(await zIndexOf("Workbench"));
   });
 });
