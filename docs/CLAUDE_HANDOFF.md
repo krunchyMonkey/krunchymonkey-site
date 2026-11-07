@@ -40,3 +40,51 @@
 ## What constitutes completion
 
 Matching screenshots, passing tests, passing GitHub Actions, a real public preview URL and reviewed privacy/documentation contents. DNS cutover and Google OAuth verification are separate gates; do not auto-approve them.
+## Proposed next evolution: KrunchOS (not yet implemented)
+
+- Read [`docs/ENGINEERING_CHARTER.md`](ENGINEERING_CHARTER.md) and the proposed KrunchOS milestone table in [`docs/ROADMAP.md`](ROADMAP.md) before implementing redesign work.
+- The intended product is a personal-workshop OS UI: draggable windows, dock, folders, project explorer, journal, schematics, and allowlisted public demo browser; on mobile it becomes a touch-first app launcher with full-screen apps.
+- Code quality is part of the public portfolio: feature-first structure, one folder per reusable component, component-level `index.ts` exports, explicitly curated feature exports, colocated tests, strict TypeScript, modular state and narrow browser adapters, reviewed ADRs, and automated quality gates.
+- The current project is still no-build static HTML/CSS. A React/TypeScript/Vite migration is a **proposal** subject to a focused architecture ADR and reviewed PR; do not change tooling or the deployed page as an incidental cleanup.
+- Preserve current approved logo/brand identity, existing informational/privacy routes, static GitHub Pages deployment, and the strict boundary from private `tg.krunchymonkey.dev` and real research data.
+- Stage the work as small independently tested PRs; include desktop/mobile visual evidence, integration/accessibility checks, and rollback awareness. No auto-merging or assumptions that the existing 12 issues are complete.
+
+
+## Proposed Open Workshop community direction
+
+- Read [`docs/OPEN_WORKSHOP.md`](OPEN_WORKSHOP.md) for the planned contribution journey. KrunchOS is a curated creative space for software craftsmanship, not an unmoderated code-sharing platform.
+- The site began with AI assistance. Human-written and AI-assisted contributions are held to the same standards of understanding, architectural intent, correctness, and maintainability.
+- Establish licensing, brand-asset exclusions, and safe PR review during Foundations. Introduce read-only first-party craft notes during Workbench. External contributions and a curated gallery belong to a **proposed v1.1 milestone**, not v1.0.
+- Never expose private research data. Do not enable automatic third-party publishing, merges, or privileged CI execution of unreviewed changes. Preserve opt-in attribution and a maintainer review path.
+
+
+## Self-documenting code rule for KrunchOS
+
+- Favor understandable names, typed contracts, small functions, clear component boundaries, and colocated behavior tests. The code should explain what it does without narration.
+- Do not generate redundant inline comments, decorative section headers, routine JSDoc, or boilerplate prose around implementation.
+- Keep rare short comments when they explain a non-obvious **why** (browser workaround, security invariant, external constraint, tradeoff). Prefer improving the design first.
+- Keep architectural decisions and public contributor/onboarding guidance outside implementation in focused ADRs, README files, or docs. Do not confuse sparse source comments with no documentation.
+- Retain required copyright/license notices and technical tool directives. Do not optimize for a comment-count metric.
+
+## Groomed KrunchOS backlog and board assignment
+
+- The 32 planned KrunchOS issues were created as `KMOS-001` through `KMOS-032` (GitHub issues #14–#45), with scoped acceptance criteria and dependencies. Consult the [roadmap](ROADMAP.md), rather than inventing more tickets for the same scope.
+- Repository milestones and Project #9 assignments are not yet verified. The idempotent `scripts/setup-krunchos-planning.ps1` helper assigns existing issues to seven milestones and the project board when run by an authorized GitHub CLI user. Preview with `-WhatIf`; it does not close or modify original issues.
+- Original issues #1–#12 remain open pending actual release acceptance; #1, #7 and #8 contain earlier evidence comments; #2–#6 and #9–#12 contain audit notes. Don't close any without checking its specific outstanding validation/approval.
+
+## Curated Browser and first-party KrunchOS presentation
+
+- [KMOS-033](https://github.com/krunchyMonkey/krunchymonkey-site/issues/46) is a curated browser for **fully working first-party public demos**, not a screenshot gallery or unrestricted browser.
+- Approved public demo sites we control are expected to implement a pixel-era KrunchOS mode natively. The same application remains available in its normal standalone appearance with shared behavior and data model.
+- Initial integration uses an allowlisted HTTPS entry point and a non-security URL presentation hint. Only add exact-origin/source-validated `postMessage` when two-way communication is required.
+- Run an actual fictional-data multistep workflow in the demo as an acceptance test. Keep any mock external integrations honestly labeled; do not leak private research data or integrate directly with private `tg.krunchymonkey.dev`.
+- Restrict host navigation to trusted configured sites. Cross-origin iframe navigation cannot be treated as fully controlled by the parent; the demo must cooperate with external-link policy. If an embed fails, offer a clear external fallback.
+- Keep apps independently deployed and testable. Prefer simple, typed presentation contracts over a runtime CSS injector or privileged proxy.
+
+## Pixel-first design change request (v0.1 experiment)
+
+- New [KMOS-034 #48](https://github.com/krunchyMonkey/krunchymonkey-site/issues/48) and [KMOS-035 #49](https://github.com/krunchyMonkey/krunchymonkey-site/issues/49): evaluate 8bitcn/ui and build a reversible pixel-first UX spike.
+- [Draft PR #50](https://github.com/krunchyMonkey/krunchymonkey-site/pull/50) on `experiment/krunchos-v01-8bitcn-ui` is intentionally **stacked against** `feat/krunchos-v01-foundations` (draft PR #47), not `main`.
+- Preserve the baseline v0.1 local preview at `/`, while `/?preview=8bitcn` shows the interactive comparison. The pixel design is not yet adopted or deployed.
+- Use authentic attributed upstream 8bitcn/ui Button/Card components with selective Tailwind setup and original project monkey logo; test 1440px desktop, 390px mobile, keyboard/touch and bundle impact.
+- No private genealogy, internal Tracing Guatemala server, credential, DNS, backend, Google login, or Pages changes. No merges until owner approval.
