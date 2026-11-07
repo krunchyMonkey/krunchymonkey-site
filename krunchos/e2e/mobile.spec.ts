@@ -134,7 +134,6 @@ test.describe("app navigation", () => {
       await mobile.launcher.getByRole("button", { name: "Workbench" }).tap();
 
       const box = await mobile.back.boundingBox();
-      console.log(`Back to home box (${appearance}): ${box!.width}x${box!.height}`);
       expect(box!.width).toBeGreaterThanOrEqual(COMFORTABLE_TOUCH_TARGET);
       expect(box!.height).toBeGreaterThanOrEqual(COMFORTABLE_TOUCH_TARGET);
 
