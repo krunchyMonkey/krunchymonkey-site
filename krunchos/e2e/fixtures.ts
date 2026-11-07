@@ -47,6 +47,9 @@ export async function bootKrunchOS(page: Page, path = PIXEL_OS_PATH) {
   await waitForStableRender(page);
 }
 
+/** Glyphs that OS fallback fonts render inconsistently; icons must be owned SVG instead. */
+export const FALLBACK_FONT_GLYPHS = /[▤▣▥⌘◎✦⚙⌂✧▧]/u;
+
 export function desktopShell(page: Page) {
   const desktop = page.getByRole("main", { name: "KrunchOS desktop" });
   return {

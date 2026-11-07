@@ -1,4 +1,5 @@
 import {
+  FALLBACK_FONT_GLYPHS,
   bootKrunchOS,
   desktopShell,
   dragWindow,
@@ -39,6 +40,20 @@ test.describe("boot", () => {
     await expect(os.window("Workbench")).toBeVisible();
     await expect(os.window("Open Bench")).toBeVisible();
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(0);
+  });
+
+  test("draws icons as owned svg instead of fallback-font glyphs", async ({ page }) => {
+    const os = desktopShell(page);
+    expect(await page.locator("body").innerText()).not.toMatch(FALLBACK_FONT_GLYPHS);
+
+    for (const group of [os.shortcuts, os.dock]) {
+      for (const button of await group.getByRole("button").all()) {
+        await expect(button.locator('svg[aria-hidden="true"]')).toHaveCount(1);
+      }
+    }
+    await expect(
+      os.window("Workbench").locator('.window-app-icon svg[aria-hidden="true"]'),
+    ).toHaveCount(1);
   });
 
   test("hides the mobile launcher at desktop width", async ({ page }) => {

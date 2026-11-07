@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { publicProjects } from "../../workbench";
+import { PixelIcon } from "../../../components/PixelIcon";
 import {
   BitButton,
   BitCard,
@@ -16,22 +17,30 @@ export function PixelWorkbench() {
   return (
     <div className="pixel-workbench">
       <div className="pixel-app-toolbar">
-        <strong>▣ WORKBENCH / PROJECT FILES</strong>
+        <strong>
+          <PixelIcon name="projects" /> WORKBENCH / PROJECT FILES
+        </strong>
         <span>{publicProjects.length} FILES</span>
       </div>
       <div className="pixel-directory">
         <nav className="pixel-directory-sidebar" aria-label="Project folders">
           <span className="pixel-folder-heading">DRIVE C:</span>
           <strong>▾ /projects</strong>
-          <span> ▣ Featured</span>
-          <span> ▥ Experiments</span>
+          <span>
+            <PixelIcon name="projects" /> Featured
+          </span>
+          <span>
+            <PixelIcon name="journal" /> Experiments
+          </span>
           <span className="pixel-directory-divider">───</span>
           <small>SELECT A FILE TO INSPECT</small>
         </nav>
         <section className="pixel-directory-main" aria-label="Project files">
           <div className="pixel-directory-heading">
             <h2>PROJECTS</h2>
-            <span>▣ /WORKBENCH</span>
+            <span>
+              <PixelIcon name="projects" /> /WORKBENCH
+            </span>
           </div>
           <div className="pixel-file-grid">
             {publicProjects.map((project) => (
@@ -42,11 +51,15 @@ export function PixelWorkbench() {
               >
                 <BitCardHeader>
                   <span className="pixel-file-icon" aria-hidden="true">
-                    {project.id === "tracing-guatemala"
-                      ? "▥"
-                      : project.kind === "Experiment"
-                        ? "✧"
-                        : "▤"}
+                    <PixelIcon
+                      name={
+                        project.id === "tracing-guatemala"
+                          ? "journal"
+                          : project.kind === "Experiment"
+                            ? "experiment"
+                            : "workbench"
+                      }
+                    />
                   </span>
                   <BitCardTitle>{project.name}</BitCardTitle>
                   <BitCardDescription>{project.kind}</BitCardDescription>
@@ -72,7 +85,9 @@ export function PixelWorkbench() {
             aria-label="Selected project details"
             aria-live="polite"
           >
-            <span className="pixel-inspector-title">▥ FILE DETAILS</span>
+            <span className="pixel-inspector-title">
+              <PixelIcon name="file" /> FILE DETAILS
+            </span>
             <div>
               <strong>{selected.name}</strong>
               <p>{selected.summary}</p>

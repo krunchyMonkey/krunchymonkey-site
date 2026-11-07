@@ -1,6 +1,7 @@
 import { useRef, type PointerEvent, type ReactNode } from "react";
 import type { DesktopWindow } from "../../model";
 import { getApp } from "../../../apps";
+import { PixelIcon } from "../../../components/PixelIcon";
 
 interface WindowProps {
   readonly window: DesktopWindow;
@@ -83,7 +84,7 @@ export function Window({
           onPointerCancel={stopDrag}
           aria-hidden="true"
         >
-          <span className="window-app-icon">{app?.icon}</span>
+          <span className="window-app-icon">{app ? <PixelIcon name={app.icon} /> : null}</span>
           <strong>{app?.title ?? "Unknown"}</strong>
         </div>
         <div className="window-actions">

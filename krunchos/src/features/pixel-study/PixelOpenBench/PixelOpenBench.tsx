@@ -1,3 +1,4 @@
+import { PixelIcon } from "../../../components/PixelIcon";
 import {
   BitButton,
   BitCard,
@@ -11,13 +12,15 @@ export function PixelOpenBench() {
   return (
     <div className="pixel-bench">
       <div className="pixel-app-toolbar">
-        <strong>✦ OPEN BENCH</strong>
+        <strong>
+          <PixelIcon name="open-bench" /> OPEN BENCH
+        </strong>
         <span>PREVIEW</span>
       </div>
       <div className="pixel-bench-content">
         <div className="pixel-bench-intro">
           <span className="pixel-bench-emblem" aria-hidden="true">
-            ✦
+            <PixelIcon name="open-bench" />
           </span>
           <div>
             <h2>Pull up a chair.</h2>
