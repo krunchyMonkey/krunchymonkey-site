@@ -2,31 +2,117 @@ name: Validate KrunchOS preview
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
     paths:
       - "krunchos/**"
+      - "assets/krunchymonkey-logo.webp"
       - ".github/workflows/krunchos-validate.yml"
 
 permissions:
   contents: read
 
+concurrency:
+  group: krunchos-validate-${{ github.event.pull_request.number }}-${{ github.event.action == 'labeled' && 'label' || 'code' }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22.23.4"
+
 jobs:
   preview-checks:
-    runs-on: ubuntu-latest
+    if: github.event.action != 'labeled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     defaults:
       run:
         working-directory: krunchos
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
-      - name: Install preview dependencies
-        run: npm install --no-audit --no-fund
-      - name: Check TypeScript
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: krunchos/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Check TypeScript (app and E2E)
         run: npm run typecheck
-      - name: Lint preview source
+      - name: Lint preview source and tests
         run: npm run lint
-      - name: Run colocated tests
+      - name: Run colocated unit and component tests
         run: npm test
       - name: Build local preview artifact
         run: npm run build
+
+  e2e:
+    if: github.event.action != 'labeled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    # The pinned Playwright image fixes OS, fonts and browser builds so Linux screenshots stay deterministic.
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      options: --user 1001
+    defaults:
+      run:
+        working-directory: krunchos
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: krunchos/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run functional and visual E2E (Chromium desktop/mobile, WebKit mobile)
+        run: npx playwright test
+      - name: Upload HTML report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: krunchos/playwright-report/
+          retention-days: 7
+      - name: Upload failure traces, screenshots, videos and diffs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: krunchos/test-results/
+          retention-days: 7
+
+  # Opt-in and review-only: adding the `krunchos-snapshots` label renders candidate Linux
+  # baselines as an artifact. Nothing is committed; a person reviews and commits them.
+  snapshot-candidates:
+    if: github.event.action == 'labeled' && github.event.label.name == 'krunchos-snapshots'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      options: --user 1001
+    defaults:
+      run:
+        working-directory: krunchos
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: krunchos/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Render candidate screenshot baselines
+        run: npx playwright test visual.ts --update-snapshots=all
+      - name: Upload candidate baselines for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: krunchos-snapshot-candidates
+          path: krunchos/e2e/__screenshots__/linux/
+          retention-days: 7
