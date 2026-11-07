@@ -112,6 +112,26 @@ test.describe("window management", () => {
     await expect(workbench).toHaveCount(1);
   });
 
+  test("dock buttons expose running and minimized state without renaming", async ({ page }) => {
+    const os = desktopShell(page);
+    const workbench = os.window("Workbench");
+    const dockButton = os.dock.getByRole("button", { name: "Workbench", exact: true });
+
+    await expect(dockButton).toHaveAccessibleDescription("Running");
+    await workbench.getByRole("button", { name: "Minimize Workbench" }).click();
+    await expect(dockButton).toHaveAccessibleDescription("Minimized");
+    await dockButton.click();
+    await expect(dockButton).toHaveAccessibleDescription("Running");
+    await workbench.getByRole("button", { name: "Close Workbench" }).click();
+    await expect(dockButton).toHaveAccessibleDescription("");
+    await dockButton.click();
+    await expect(dockButton).toHaveAccessibleDescription("Running");
+
+    const terminal = os.dock.getByRole("button", { name: "Terminal, planned for v1.0" });
+    await expect(terminal).toBeVisible();
+    await expect(terminal).toHaveAccessibleDescription("");
+  });
+
   test("restoring a minimized window keeps its application state", async ({ page }) => {
     const os = desktopShell(page);
     const workbench = os.window("Workbench");

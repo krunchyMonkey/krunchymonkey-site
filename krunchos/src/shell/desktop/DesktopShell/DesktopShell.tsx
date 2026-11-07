@@ -106,16 +106,23 @@ export function DesktopShell({ appearance, windows, dispatch, onLaunch }: Deskto
       <nav className="desktop-dock" aria-label="Application dock">
         {apps.map((app) => {
           const opened = windows.find((frame) => frame.id === app.id);
+          const stateId = "dock-state-" + app.id;
           return (
             <button
               key={app.id}
               type="button"
+              aria-describedby={opened ? stateId : undefined}
               className={opened && !opened.minimized ? "dock-app is-running" : "dock-app"}
               onClick={() => launch(app.id)}
               aria-label={app.title + (app.available ? "" : ", planned for " + app.release)}
             >
               <span aria-hidden="true">{app.icon}</span>
               <small>{app.title}</small>
+              {opened ? (
+                <span id={stateId} hidden>
+                  {opened.minimized ? "Minimized" : "Running"}
+                </span>
+              ) : null}
             </button>
           );
         })}
