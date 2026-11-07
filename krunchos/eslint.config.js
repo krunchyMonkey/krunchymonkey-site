@@ -64,6 +64,10 @@ export default tseslint.config(
     },
   },
   {
+    files: ["scripts/**/*.mjs"],
+    languageOptions: { globals: { process: "readonly", console: "readonly" } },
+  },
+  {
     files: ["src/**/*.ts", "src/**/*.tsx"],
     rules: {
       "import-x/no-restricted-paths": [

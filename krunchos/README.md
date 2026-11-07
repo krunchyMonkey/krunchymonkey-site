@@ -19,10 +19,12 @@ Reproduce CI locally, in order:
 
 ```bash
 npm ci
-npm run check                            # typecheck, lint, format:check, unit tests, build
+npm run check                            # typecheck, lint, format:check, unit tests, build, check:dist
 npx playwright install chromium webkit   # once
 npm run test:e2e                         # Playwright E2E + visual regression on 127.0.0.1:4317
 ```
+
+`npm run check:dist` verifies the built `dist/` is a relocatable public artifact (relative URLs, allowlisted file types, no private strings, gzip budgets); add `-- --json dist-manifest.json` for a sha256 manifest.
 
 `npm run format` applies Prettier. Screenshot baselines are Linux-only, so visual results on other platforms are not authoritative.
 
